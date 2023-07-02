@@ -1,1 +1,148 @@
+header
+{
+    text-align: center;
+}
 
+.Tabs
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    width: 200px;
+    text-align: center;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.Footer
+{
+    text-align: center; 
+}
+
+.Tabs nav ul, .Footer nav ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Tabs nav li, .Footer nav li
+{
+    margin: 0;
+    padding: 0;
+    padding-bottom: 5px;
+}
+
+.Tabs nav
+{
+    text-decoration: none;
+}
+
+.grid-container
+{
+    padding: 30px;
+}
+
+.CurrentCumulativeTotal
+{
+    border: 4mm ridge rgba(17, 140, 79, 0.6);
+    margin-bottom: 10px;
+}
+
+.Goals
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    margin-bottom: 10px;
+}
+
+.MajorHeadlines
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    margin-bottom: 10px;
+}
+
+.Stock
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    margin-bottom: 10px;
+}
+
+.MonthlyBalance
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    margin-bottom: 10px;
+}
+
+h4
+{
+    padding-left: 5px;
+}
+
+
+@media screen and (min-width: 1000px)
+{
+    body 
+    {
+        margin-right: 30px;
+        margin-left: 30px;
+    }
+
+    header
+    {
+        text-align: left;
+    }
+
+    .Tabs
+    {
+        width: auto;
+    }
+
+    .Tabs nav ul
+    {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .Footer nav ul 
+    {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid-container
+    {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 10px;
+    }
+
+    .CurrentCumulativeTotal
+    {
+        grid-row-start: 1;
+        grid-column-start: 1;
+    }
+
+    .Goals
+    {
+        grid-row-start: 1;
+        grid-column-start: 2;
+    }
+
+    .MajorHeadlines
+    {
+        grid-row-start: 2;
+        grid-column-start: span 2;
+    }
+
+    .Stock
+    {
+        grid-row-start: 3;
+        grid-column-start: 1;
+    }
+
+    .MonthlyBalance
+    {
+        grid-row-start: 3;
+        grid-column-start: 2;
+    }
+}
