@@ -57,6 +57,23 @@ public class UsersController {
             return "users/protected";
         }
     }
+    @PostMapping("/Income")
+    public String Income(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
+        double Income = Double.parseDouble(formData.get("Income"));
+        User user = (User) session.getAttribute("session_user");
+
+        if (user == null){
+            return "/account";
+        }
+        else {
+            //success
+            model.addAttribute("user", user);
+            double updatedBalance = user.getBalance() + Income;
+            user.setBalance(updatedBalance);
+         
+            return "homepage";
+        }
+    }
 
     @GetMapping("/logout")
     public String destroySession(HttpServletRequest request){
