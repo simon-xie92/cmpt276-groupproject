@@ -11,12 +11,8 @@ public class User {
     private String name;
     private String password;
     private double balance;
-   
-    public User() {
-    }
 
-    public User(int uid, String name, String password, double balance) {
-        this.uid = uid;
+    public User(String name, String password, double balance) {
         this.name = name;
         this.password = password;
         this.balance = balance;
@@ -36,10 +32,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {

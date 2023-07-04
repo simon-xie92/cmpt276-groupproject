@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.cmpt276.groupproject.models.UserRepository;
 import com.cmpt276.groupproject.models.User;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -39,6 +40,16 @@ public class UsersController {
             model.addAttribute("user", user);
             return "users/protected";
         }
+    }
+
+    @GetMapping("/users/signup")
+    public String addUser(@RequestParam Map<String,String> newuser, HttpServletResponse response){
+        String newName = newuser.get("name");
+        String newPassword = newuser.get("password");
+        double balance = 0;
+        userRepo.save(new User(newName,newPassword,balance));
+        response.setStatus(201);
+        return"users/login";
     }
 
     @PostMapping("/login")
