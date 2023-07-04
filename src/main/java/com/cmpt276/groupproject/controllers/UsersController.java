@@ -49,7 +49,7 @@ public class UsersController {
         double balance = 0;
         userRepo.save(new User(newName,newPassword,balance));
         response.setStatus(201);
-        return"users/login";
+        return "users/login";
     }
 
     @PostMapping("/login")
