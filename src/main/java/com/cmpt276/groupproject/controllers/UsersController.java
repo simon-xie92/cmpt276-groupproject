@@ -38,14 +38,14 @@ public class UsersController {
             return "users/login";
         } else {
             model.addAttribute("user", user);
-            return "users/protected";
+            return "users/homepage";
         }
     }
 
-    @GetMapping("/users/signup")
+    @PostMapping("/users/signup")
     public String addUser(@RequestParam Map<String,String> newuser, HttpServletResponse response){
-        String newName = newuser.get("name");
-        String newPassword = newuser.get("password");
+        String newName = newuser.get("newName");
+        String newPassword = newuser.get("newPassword");
         double balance = 0;
         userRepo.save(new User(newName,newPassword,balance));
         response.setStatus(201);
@@ -65,7 +65,7 @@ public class UsersController {
             User user = userlist.get(0);
             request.getSession().setAttribute("session_user", user);
             model.addAttribute("user", user);
-            return "users/protected";
+            return "users/homepage";
         }
     }
     @PostMapping("/Income")
@@ -74,7 +74,7 @@ public class UsersController {
         User user = (User) session.getAttribute("session_user");
 
         if (user == null){
-            return "/account";
+            return "account";
         }
         else {
             //success
