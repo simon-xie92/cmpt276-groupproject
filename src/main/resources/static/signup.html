@@ -8,24 +8,13 @@
     <link rel="stylesheet" href="signup.css">
 </head>
 <body>
- <div class="Tabs">
-        <nav>
-            <ul>
-                <li><a><button type = "button" onclick="location.href = '/account.html'"> Account</button></a></li>
-                <li><a><button type = "button" onclick="location.href = '/interestCalc.html'"> Tools </button></a></li>
-                <li><a><button type = "button" onclick="location.href = ''"> News</button></a></li>
-                <li><a><button type = "button" onclick="location.href = ''"> Stocks</button></a></li>
-                <li><a><button type = "button" onclick="location.href = ''"> Log out</button></a></li>
-            </ul>
-        </nav>
-    </div>
    
 <div class="SignUp">
 	<form action="/users/signup" method="post">
 		<center><label for="newName">New Username:</label><br>
-  		<input type="text" id="newName" name="newName"><br>
+  		<input type="text" id="name" name="name"><br>
   		<label for="newPass">New Password</label><br>
-  		<input type="text" id="newPassword" name="newPassword"><br><br>
+  		<input type="text" id="password" name="password"><br><br>
         <input class="btn btn-primary" type="submit" value="SEND"></input></center>
 	</form>
 </div>
