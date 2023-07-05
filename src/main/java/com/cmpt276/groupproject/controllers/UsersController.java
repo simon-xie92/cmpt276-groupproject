@@ -44,8 +44,8 @@ public class UsersController {
 
     @PostMapping("/users/signup")
     public String addUser(@RequestParam Map<String,String> newuser, HttpServletResponse response){
-        String newName = newuser.get("newName");
-        String newPassword = newuser.get("newPassword");
+        String newName = newuser.get("name");
+        String newPassword = newuser.get("password");
         double balance = 0;
         userRepo.save(new User(newName,newPassword,balance));
         response.setStatus(201);
@@ -82,11 +82,7 @@ public class UsersController {
             double updatedBalance = user.getBalance() + Income;
             user.setBalance(updatedBalance);
          
-<<<<<<< HEAD
             return "users/balanceUpdate";
-=======
-            return "users/homepage";
->>>>>>> 1ac28aa210c4e3b65fa354e70c4fdf57d1c74fe1
         }
     }
 
