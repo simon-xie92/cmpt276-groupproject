@@ -70,11 +70,11 @@ public class UsersController {
     }
     @PostMapping("/Income")
     public String Income(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
-        double Income = Double.parseDouble(formData.get("Income"));
+        double Income = Double.parseDouble(formData.get("incomeAmount"));
         User user = (User) session.getAttribute("session_user");
 
         if (user == null){
-            return "account";
+            return "users/login";
         }
         else {
             //success
@@ -82,7 +82,7 @@ public class UsersController {
             double updatedBalance = user.getBalance() + Income;
             user.setBalance(updatedBalance);
          
-            return "homepage";
+            return "users/balanceUpdate";
         }
     }
 
