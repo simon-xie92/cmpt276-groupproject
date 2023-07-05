@@ -55,8 +55,8 @@ public class UsersController {
     @PostMapping("/login")
     public String login(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
 
-        String name = formData.get("name");
-        String password = formData.get("password");
+        String name = formData.get("uname");
+        String password = formData.get("upassword");
         List<User> userlist = userRepo.findByNameAndPassword(name, password);
         if (userlist.isEmpty()){
             return "users/login";
