@@ -82,7 +82,11 @@ public class UsersController {
             double updatedBalance = user.getBalance() + Income;
             user.setBalance(updatedBalance);
          
+<<<<<<< HEAD
             return "users/balanceUpdate";
+=======
+            return "users/homepage";
+>>>>>>> 1ac28aa210c4e3b65fa354e70c4fdf57d1c74fe1
         }
     }
 
