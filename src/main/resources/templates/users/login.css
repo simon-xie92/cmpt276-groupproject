@@ -1,1 +1,25 @@
+body
+{
+    margin: auto;
+    max-width: 500px;
+}
 
+.Page
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    padding: 20px;
+    text-align: center;
+}
+
+.Page input
+{
+    width: 250px;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+.Page button
+{
+    width: 100px;
+    height: 25px;
+}
