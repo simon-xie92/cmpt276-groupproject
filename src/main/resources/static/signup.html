@@ -8,18 +8,20 @@
     <link rel="stylesheet" href="signup.css">
 </head>
 <body>
-   
-<div class="SignUp">
-	<form action="/users/signup" method="post">
-		<center><label for="newName">New Username:</label><br>
-  		<input type="text" id="name" name="name"><br>
-  		<label for="newPass">New Password</label><br>
-  		<input type="text" id="password" name="password"><br><br>
-        <input class="btn btn-primary" type="submit" value="SEND"></input></center>
-	</form>
-</div>
-  
-  
+
+    <header>
+        <h1>Stock Buddy Sign Up</h1>
+    </header>
+
+    <div class="Page">
+        <form action="/users/signup" method="post">
+            <label for="newName">New Username:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="newPass">New Password:</label><br>
+            <input type="text" id="password" name="password"><br><br>
+            <input class="btn btn-primary" type="submit" value="Sign up"></input>
+        </form>
+    </div>
    
 </body>
 </html>
