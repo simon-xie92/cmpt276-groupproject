@@ -12,16 +12,20 @@ public class User {
     private String password;
     private double balance;
     private double monthlyincome;
+    private double monthlyexpenses;
+    private double monthlysavings;
 
     public User(){
         
     }
 
-    public User(String name, String password, double balance, double monthlyincome) {
+    public User(String name, String password, double balance, double monthlyincome, double monthlyexpenses, double monthlysavings) {
         this.name = name;
         this.password = password;
         this.balance = balance;
         this.monthlyincome = monthlyincome;
+        this.monthlyexpenses = monthlyexpenses;
+        this.monthlysavings = monthlysavings;
     }
 
     public int getUid() {
@@ -58,6 +62,23 @@ public class User {
 
     public void setMonthlyincome(double monthlyincome) {
         this.monthlyincome = monthlyincome;
+    }
+
+
+    public double getMonthlyexpenses() {
+        return monthlyexpenses;
+    }
+
+    public void setMonthlyexpenses(double monthlyexpenses) {
+        this.monthlyexpenses = monthlyexpenses;
+    }
+
+    public double getMonthlysavings() {
+        return monthlysavings;
+    }
+
+    public void setMonthlysavings(double monthlysavings) {
+        this.monthlysavings = monthlysavings;
     }
 
    

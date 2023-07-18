@@ -23,7 +23,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import com.cmpt276.groupproject.models.TransactionRepository;
+import com.cmpt276.groupproject.models.Expense;
+import com.cmpt276.groupproject.models.ExpenseRepository;
 import com.cmpt276.groupproject.models.Transaction;
+
 
 import java.time.LocalDate;
 
@@ -36,6 +39,9 @@ public class UsersController {
 
     @Autowired
     private TransactionRepository transactionRepo;
+
+    @Autowired
+    private ExpenseRepository expenseRepo;
 
     @GetMapping("/")
     public RedirectView process(){
@@ -58,7 +64,9 @@ public class UsersController {
         String newPassword = newuser.get("password");
         double balance = 0;
         double monthlyIncome = 0;
-        userRepo.save(new User(newName,newPassword,balance,monthlyIncome));
+        double monthlyExpenses = 0;
+        double monthlySavings = monthlyIncome - monthlyExpenses;
+        userRepo.save(new User(newName,newPassword,balance,monthlyIncome, monthlyExpenses, monthlySavings));
         response.setStatus(201);
         return "users/login";
     }
@@ -85,12 +93,14 @@ public class UsersController {
         int userId = user.getUid();
         System.out.println(userId);
         List<Transaction> transaction = transactionRepo.findByUid(userId);
+        List<Expense> expense = expenseRepo.findByUid(userId);
+        model.addAttribute("es", expense);
         model.addAttribute("us", user);
         model.addAttribute("ts", transaction);
         return "users/account";
     }
     @PostMapping("/monthlyIncome")
-    public String monthlyIncomeIncome(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
+    public String monthlyIncome(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
         double monthlyIncome = Double.parseDouble(formData.get("monthlyIncomeAmount"));
         User user = (User) session.getAttribute("session_user");
 
@@ -99,12 +109,38 @@ public class UsersController {
         }
         else {
             //success
+            double monthlyExpenses = user.getMonthlyexpenses();
+            double monthlySavings = monthlyIncome - monthlyExpenses;
             user.setMonthlyincome(monthlyIncome);
+            user.setMonthlysavings(monthlySavings);
             userRepo.save(user);
             model.addAttribute("user", user);
             return getUserBalance(model, request, session);
         }
     }
+    @PostMapping("/monthlyExpenses")
+    public String monthlyExpenses(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
+        double monthlyExpense = Double.parseDouble(formData.get("monthlyExpenseAmount"));
+        String reason = formData.get("monthlyExpense");
+        User user = (User) session.getAttribute("session_user");
+
+        if (user == null){
+            return "users/login";
+        }
+        else {
+            //success
+            double monthlyExpenses = user.getMonthlyexpenses() + monthlyExpense;
+            double monthlySavings = user.getMonthlyincome() - monthlyExpenses;
+            int userId = user.getUid();
+            user.setMonthlyexpenses(monthlyExpenses);
+            user.setMonthlysavings(monthlySavings);
+            userRepo.save(user);
+            expenseRepo.save(new Expense(userId, reason, monthlyExpense));
+            model.addAttribute("user", user);
+            return getUserBalance(model, request, session);
+        }
+    }
+
     @PostMapping("/Income")
     public String Income(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
         double Income = Double.parseDouble(formData.get("incomeAmount"));
