@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button>
+    <ul>
+        <li th:each="user:${us}">
+            <h3>Your Balance:</h3>
+            <p th:text="${user.balance}"></p><br>
+            
+            <h3>Your Montly Income:</h3>
+            <p th:text="${user.monthlyincome}"></p>
+            <!---
+            <h2>Your Expenses</h2>
+            <p th:text="user:${expenses}"></p> --->
+        </li>
+    </ul>
+</body>
+</html>

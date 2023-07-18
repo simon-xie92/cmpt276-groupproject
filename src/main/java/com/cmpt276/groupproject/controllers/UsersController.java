@@ -47,7 +47,8 @@ public class UsersController {
         String newName = newuser.get("name");
         String newPassword = newuser.get("password");
         double balance = 0;
-        userRepo.save(new User(newName,newPassword,balance));
+        double monthlyIncome = 0;
+        userRepo.save(new User(newName,newPassword,balance,monthlyIncome));
         response.setStatus(201);
         return "users/login";
     }
@@ -68,6 +69,28 @@ public class UsersController {
             return "users/homepage";
         }
     }
+    @GetMapping("/checkBalance")
+    public String getUserBalance(Model model, HttpServletRequest request, HttpSession session){
+        User user = (User) session.getAttribute("session_user");
+        model.addAttribute("us", user);
+        return "users/account";
+    }
+    @PostMapping("/monthlyIncome")
+    public String monthlyIncomeIncome(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
+        double monthlyIncome = Double.parseDouble(formData.get("monthlyIncomeAmount"));
+        User user = (User) session.getAttribute("session_user");
+
+        if (user == null){
+            return "users/login";
+        }
+        else {
+            //success
+            user.setMonthlyincome(monthlyIncome);
+            userRepo.save(user);
+            model.addAttribute("user", user);
+            return "users/returnToHome";
+        }
+    }
     @PostMapping("/Income")
     public String Income(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
         double Income = Double.parseDouble(formData.get("incomeAmount"));
@@ -78,13 +101,16 @@ public class UsersController {
         }
         else {
             //success
-            model.addAttribute("user", user);
+            
             double updatedBalance = user.getBalance() + Income;
+            System.out.println(updatedBalance);
             user.setBalance(updatedBalance);
-         
-            return "users/balanceUpdate";
+            userRepo.save(user);
+            model.addAttribute("user", user);
+            return "users/returnToHome";
         }
     }
+
 
     @GetMapping("/logout")
     public String destroySession(HttpServletRequest request){

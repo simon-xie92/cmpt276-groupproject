@@ -11,15 +11,17 @@ public class User {
     private String name;
     private String password;
     private double balance;
-    
+    private double monthlyincome;
+
     public User(){
         
     }
 
-    public User(String name, String password, double balance) {
+    public User(String name, String password, double balance, double monthlyincome) {
         this.name = name;
         this.password = password;
         this.balance = balance;
+        this.monthlyincome = monthlyincome;
     }
 
     public int getUid() {
@@ -49,6 +51,16 @@ public class User {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+    public double getMonthlyincome() {
+        return monthlyincome;
+    }
+
+    public void setMonthlyincome(double monthlyincome) {
+        this.monthlyincome = monthlyincome;
+    }
+
+   
     
     
 }
