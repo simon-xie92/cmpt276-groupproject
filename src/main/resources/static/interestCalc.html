@@ -9,30 +9,39 @@
       rel="stylesheet"
     />
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="interestCalc.css" />
   </head>
   <body>
-    <h1>Interest Calculator</h1>
+    <header>
+      <h1>Interest Calculator</h1>
+    </header>
+
     <div class="container">
-      <div class="input-wrapper">
-        <div class="wrapper">
-          <label for="principal">Principal($):</label>
-          <input type="number" id="principal" value="1000" />
+      
+      <div class="calculation">
+        <div class="input-wrapper">
+          <div class="wrapper">
+            <label for="principal">Principal($):</label>
+            <input type="number" id="principal" value="1000" />
+          </div>
+
+          <div class="wrapper">
+            <label for="rate">Rate:</label>
+            <input type="number" id="rate" value="5" />
+          </div>
         </div>
-        <div class="wrapper">
-          <label for="rate">Rate:</label>
-          <input type="number" id="rate" value="5" />
+
+        <div class="time-wrapper">
+          <label for="time">Time:</label>
+          <input type="number" id="time" value="1" />
+          <select name="duration" id="duration">
+            <option value="year">Year</option>
+            <option value="month">Month</option>
+          </select>
+          <button id="calculate-btn">Calculate</button>
         </div>
-      </div>
-      <label for="time">Time:</label>
-      <div class="time-wrapper">
-        <input type="number" id="time" value="1" />
-        <select name="duration" id="duration">
-          <option value="year">Year</option>
-          <option value="month">Month</option>
-        </select>
-      </div>
-      <button id="calculate-btn">Calculate</button>
+      <div>
+
       <div id="result"></div>
     </div>
     <!-- Script -->
