@@ -14,8 +14,7 @@
     <ul>
         <li th:each="user:${us}">
             <h3>Your Balance:</h3>
-            <p th:text="${user.balance}"></p><br>
-            
+            <p th:text="${user.balance}"></p>
             <h3>Your Monthly Income:</h3>
             <p th:text="${user.monthlyincome}"></p>
            
@@ -24,13 +23,13 @@
     <ul>
         <h3>Your Transactions</h3>
         <li th:each="transaction:${ts}">
+            <p>Date: <span th:text="${transaction.date}"></span>
+                , Reason: <span th:text="${transaction.reason}" ></span>
+                , Amount: <span th:text="${transaction.amount}"></span>
+                , Type: <span th:text="${transaction.type}"></span>
             
-            
-            
-            <p th:text="${transaction.date}"></p><br>
-            <p th:text="${transaction.reason}"></p><br>
-            <p th:text="${transaction.amount}"></p><br>
-            
+            </p>
+        
         </li>
     </ul>
     

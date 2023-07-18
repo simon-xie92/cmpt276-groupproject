@@ -11,16 +11,18 @@ public class Transaction {
     private int uid;
     private LocalDate date;
     private String reason;
+    private String type;
     private double amount;
 
     public Transaction() {
     }
 
-    public Transaction(int uid, LocalDate date, String reason, double amount) {
+    public Transaction(int uid, LocalDate date, String reason, double amount, String type) {
         this.uid = uid;
         this.date = date;
         this.reason = reason;
         this.amount = amount;
+        this.type = type;
     }
     
     public int getUid() {
@@ -54,6 +56,14 @@ public class Transaction {
 
     public void setTid(int tid) {
         this.tid = tid;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
     
     

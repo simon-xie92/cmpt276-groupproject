@@ -124,7 +124,7 @@ public class UsersController {
             user.setBalance(updatedBalance);
             userRepo.save(user);
             int userId = user.getUid();
-            transactionRepo.save(new Transaction(userId, date, "Deposit", Income));
+            transactionRepo.save(new Transaction(userId, date, reason, Income, "Deposit"));
             model.addAttribute("user", user);
             return getUserBalance(model, request, session);
         }
@@ -149,7 +149,7 @@ public class UsersController {
             LocalDate date = LocalDate.now();
             int userId = user.getUid();
             
-            transactionRepo.save(new Transaction(userId, date, "Withdrawl", Expense));
+            transactionRepo.save(new Transaction(userId, date, reason , Expense, "Withdrawl"));
 
             model.addAttribute("user", user);
             return getUserBalance(model, request, session);
