@@ -21,6 +21,15 @@
         </li>
     </ul>
     <ul>
+        <h3>Your Monthly Savings(Monthly Income - Monthly Expenses)</h3>
+        <li th:each="expense:${es}">
+            <p>Reason: <span th:text="${expense.reason}"></span>
+                , Amount:$<span th:text="${expense.amount}"></span>
+            </p>
+                
+        </li>
+    </ul>
+    <ul>
         <h3>Your Transactions</h3>
         <li th:each="transaction:${ts}">
             <p>Date: <span th:text="${transaction.date}"></span>
