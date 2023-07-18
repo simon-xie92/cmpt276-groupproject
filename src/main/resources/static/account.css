@@ -1,1 +1,23 @@
+body
+{
+    margin: auto;
+    max-width: 800px;
+}
 
+.calculator
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.calculator form
+{
+    margin: 10px;
+}
+
+.summary
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    padding: 20px;
+}
