@@ -1,14 +1,16 @@
 package com.cmpt276.groupproject.models;
 
+import java.util.List;
+
 public class NewsApiResponse {
 
-    private Article[] articles;
+    private List<Article> articles;
 
-    public Article[] getArticles() {
+    public List<Article> getArticles() {
         return articles;
     }
 
-    public void setArticles(Article[] articles) {
+    public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
 
