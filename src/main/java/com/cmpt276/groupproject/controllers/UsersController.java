@@ -88,7 +88,7 @@ public class UsersController {
             user.setMonthlyincome(monthlyIncome);
             userRepo.save(user);
             model.addAttribute("user", user);
-            return "users/returnToHome";
+            return getUserBalance(model, request, session);
         }
     }
     @PostMapping("/Income")
@@ -107,10 +107,28 @@ public class UsersController {
             user.setBalance(updatedBalance);
             userRepo.save(user);
             model.addAttribute("user", user);
-            return "users/returnToHome";
+            return getUserBalance(model, request, session);
         }
     }
 
+    @PostMapping("/expenses")
+    public String Expenses(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
+        double Expense = Double.parseDouble(formData.get("expenseAmount"));
+        User user = (User) session.getAttribute("session_user");
+
+        if (user == null){
+            return "users/login";
+        }
+        else {
+            //success
+            
+            double updatedBalance = user.getBalance() - Expense;
+            user.setBalance(updatedBalance);
+            userRepo.save(user);
+            model.addAttribute("user", user);
+            return getUserBalance(model, request, session);
+        }
+    }
 
     @GetMapping("/logout")
     public String destroySession(HttpServletRequest request){

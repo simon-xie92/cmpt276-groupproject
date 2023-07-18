@@ -13,12 +13,12 @@
 		<div class="row justify-content-center">
 			<div class="col-md-4">
 				<h1 class="text-center mt-5 mb-4">Your Account Info</h1>
-				<form action="/Monthly Income" method="post">
+				<form action="/monthlyIncome" method="post">
                     
 	
 					<div class="mb-3">
 						Update your Monthly Income:
-						<input type="number" id="monthlyIncomeAmount" name="monthlyIncome Amount" class="form-control form-control-lg" 
+						<input type="number" id="monthlyIncomeAmount" name="monthlyIncomeAmount" class="form-control form-control-lg" 
                             placeholder="Monthly Income Amount">
 					</div>
                     <div class="mb-3">
@@ -51,7 +51,7 @@
 						<input type="text" id="expense" name="expense" class="form-control form-control-lg" 
                             placeholder="Monthly Expense">
 
-						<input type="number" id="expenseAmount" name="expenseAmount" class="form-control form-control-lg" 
+						<input type="number" id="monthlyExpenseAmount" name="monthlyExpenseAmount" class="form-control form-control-lg" 
                             placeholder="Amount">
 					</div>
 					
@@ -65,7 +65,7 @@
                 <form action="/expenses" method="post">
                     <div class="mb-3">
 						Add the value of any additional one time expense:
-						<input type="number" id="incomeAmount" name="incomeAmount" class="form-control form-control-lg" 
+						<input type="number" id="expenseAmount" name="expenseAmount" class="form-control form-control-lg" 
                             placeholder="Expense Amount">
 					</div>
                     <div class="mb-3">
@@ -79,21 +79,6 @@
             </div>
         </div>
     </div>
-    <h2>Your Balance:</h2>
-    <p></p>
-    <h2>Estimated Monthly Savings (Income - Expenses):</h2>
-    <p></p>
-    <h2>Your Income</h2>
-    <ul>
     
-            <li th:text="user:${income}"></li>
-
-    </ul>
-    <h2>Your Expenses</h2>
-    <ul>
-        
-            <li th:each="user:${expenses}"></li>
-        
-    </ul>
 </body>
 </html>

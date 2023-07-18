@@ -9,18 +9,20 @@
     <script src='main.js'></script>
 </head>
 <body>
-    <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button>
+    <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button><br>
+    <button type = "button" onclick="location.href = '/login'"> Return to Home</button>
     <ul>
         <li th:each="user:${us}">
             <h3>Your Balance:</h3>
             <p th:text="${user.balance}"></p><br>
             
-            <h3>Your Montly Income:</h3>
+            <h3>Your Monthly Income:</h3>
             <p th:text="${user.monthlyincome}"></p>
             <!---
             <h2>Your Expenses</h2>
             <p th:text="user:${expenses}"></p> --->
         </li>
     </ul>
+    
 </body>
 </html>
