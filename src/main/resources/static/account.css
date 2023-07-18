@@ -1,23 +1,22 @@
 body
 {
     margin: auto;
-    max-width: 800px;
+    max-width: 500px;
 }
 
-.calculator
+.account
 {
     border: 4mm ridge rgba(17, 140, 79, .6);
     padding: 20px;
     margin-bottom: 10px;
 }
 
-.calculator form
+.account button
 {
     margin: 10px;
 }
 
-.summary
+.account ul
 {
-    border: 4mm ridge rgba(17, 140, 79, .6);
-    padding: 20px;
+    margin-bottom: 35px;
 }
