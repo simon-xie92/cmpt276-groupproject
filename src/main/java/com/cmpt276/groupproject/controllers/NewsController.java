@@ -2,6 +2,8 @@ package com.cmpt276.groupproject.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.cmpt276.groupproject.models.Article;
 import com.cmpt276.groupproject.service.NewsService;
 
@@ -14,7 +16,9 @@ public class NewsController {
     }
 
     @GetMapping("/news")
-    public Article[] getNews() {
-        return newsService.getNews("ca", "business").getArticles();
+    public ModelAndView getNews() {
+            ModelAndView modelAndView = new ModelAndView("news");
+            modelAndView.addObject("articles", newsService.getNews("ca", "business"));
+        return modelAndView;
     }
 }
