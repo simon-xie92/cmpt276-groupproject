@@ -3,35 +3,41 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Account Page</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' href="../../static/account.css">
     <script src='main.js'></script>
 </head>
 <body>
-    <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button><br>
-    <button type = "button" onclick="location.href = '/login'"> Return to Home</button>
-    <ul>
-        <li th:each="user:${us}">
-            <h3>Your Balance:</h3>
-            <p th:text="${user.balance}"></p>
-            <h3>Your Monthly Income:</h3>
-            <p th:text="${user.monthlyincome}"></p>
-           
-        </li>
-    </ul>
-    <ul>
-        <h3>Your Transactions</h3>
-        <li th:each="transaction:${ts}">
-            <p>Date: <span th:text="${transaction.date}"></span>
-                , Reason: <span th:text="${transaction.reason}" ></span>
-                , Amount: <span th:text="${transaction.amount}"></span>
-                , Type: <span th:text="${transaction.type}"></span>
+    <header>
+        <h1>Your Account</h1>
+    </header>
+
+    <div class="account">
+        <ul>
+            <li th:each="user:${us}">
+                <h3>Your Balance:</h3>
+                <p th:text="${user.balance}"></p>
+                <h3>Your Monthly Income:</h3>
+                <p th:text="${user.monthlyincome}"></p>
             
-            </p>
-        
-        </li>
-    </ul>
-    
+            </li>
+        </ul>
+        <ul>
+            <h2>Your Transactions</h3>
+            <li th:each="transaction:${ts}">
+                <h4>Date: <p th:text="${transaction.date}"></p></h4>
+                <h4>Reason: <p th:text="${transaction.reason}" ></p></h4>
+                <h4>Amount: <p th:text="${transaction.amount}"></p></h4>
+                <h4>Type: <p th:text="${transaction.type}"></p></h4>
+                </p>
+            
+            </li>
+        </ul>
+
+        <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button><br>
+        <button type = "button" onclick="location.href = '/login'"> Return to Home</button>
+    </div>
+
 </body>
 </html>
