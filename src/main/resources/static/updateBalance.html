@@ -5,83 +5,72 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' href="updateBalance.css">
     <script src='main.js'></script>
 </head>
 <body>
-    <div class="container-fluid">
-		<div class="row justify-content-center">
-			<div class="col-md-4">
-				<h1 class="text-center mt-5 mb-4">Your Account Info</h1>
-				<form action="/monthlyIncome" method="post">
-                    
-	
-					<div class="mb-3">
-						Update your Monthly Income:
-						<input type="number" id="monthlyIncomeAmount" name="monthlyIncomeAmount" class="form-control form-control-lg" 
-                            placeholder="Monthly Income Amount" step="0.01">
-					</div>
-                    <div class="mb-3">
-                        <!-- Submit button -->
-                        
-                        <div class="d-grid gap-2">
-                            <input class="btn btn-primary" type="submit" value="ENTER"></input>
-                        </div>
-                    </div>
-                </form>
-                <form action="/Income" method="post">
-                    <div class="mb-3">
-						Add any additional balance to your Account:
-                        <input type="text" id=income" name="income" class="form-control form-control-lg" 
-                            placeholder="Income">
-						<input type="number" id="incomeAmount" name="incomeAmount" class="form-control form-control-lg" 
-                            placeholder="Amount" step="0.01">
-					</div>
-                    <div class="mb-3">
-                        <!-- Submit button -->
-                        
-                        <div class="d-grid gap-2">
-                            <input class="btn btn-primary" type="submit" value="ENTER"></input>
-                        </div>
-                    </div>
-                </form>
-                <form action="/monthlyExpenses" method="post">
-                    <div class="mb-3">
-                        Enter each of your Monthly Expenses ($/month):
-						<input type="text" id="monthlyExpense" name="monthlyExpense" class="form-control form-control-lg" 
-                            placeholder="Monthly Expense">
+    <header>
+        <h1>Update Your Account</h1>
+    </header>
 
-						<input type="number" id="monthlyExpenseAmount" name="monthlyExpenseAmount" class="form-control form-control-lg" 
-                            placeholder="Amount" step="0.01">
-					</div>
-					
-					<div class="mb-3">
-					<!-- Submit button -->
+        <div class="update">
+            <form action="/monthlyIncome" method="post">
+                
+
+                <div>
+                    Update your Monthly Income:
+                    <input type="number" id="monthlyIncomeAmount" name="monthlyIncomeAmount" class="form-control form-control-lg" 
+                        placeholder="Monthly Income Amount" step="0.01">
+
+                    <!-- Submit button -->
                     
-                    <div class="d-grid gap-2">
+                        <input class="btn btn-primary" type="submit" value="ENTER"></input>
+                </div>
+            </form>
+            <form action="/Income" method="post">
+                <div>
+                    Add any additional balance to your Account:
+                    <input type="text" id=income" name="income" class="form-control form-control-lg" 
+                        placeholder="Income">
+                    <input type="number" id="incomeAmount" name="incomeAmount" class="form-control form-control-lg" 
+                        placeholder="Amount" step="0.01">
+
+                    <!-- Submit button -->
+                    
+                    <input class="btn btn-primary" type="submit" value="ENTER"></input>
+                </div>
+            </form>
+            <form action="/monthlyExpenses" method="post">
+                <div>
+                    Enter each of your Monthly Expenses ($/month):
+                    <input type="text" id="monthlyExpense" name="monthlyExpense" class="form-control form-control-lg" 
+                        placeholder="Monthly Expense">
+
+                    <input type="number" id="monthlyExpenseAmount" name="monthlyExpenseAmount" class="form-control form-control-lg" 
+                        placeholder="Amount" step="0.01">
+                
+                <!-- Submit button -->
+                
+                    <input class="btn btn-primary" type="submit" value="ENTER"></input>
+                </div>
+            </form>
+
+            <form action="/expenses" method="post">
+                <div>
+                    Add the value of any additional one time expense:
+                    <input type="text" id="expense" name="expense" class="form-control form-control-lg" 
+                        placeholder="Expense">
+                    
+                    <input type="number" id="expenseAmount" name="expenseAmount" class="form-control form-control-lg" 
+                        placeholder="Amount" step="0.01">
+
+                    <!-- Submit button -->
+                    
                         <input class="btn btn-primary" type="submit" value="ENTER"></input>
                     </div>
-                </form>
-                <form action="/expenses" method="post">
-                    <div class="mb-3">
-                        Add the value of any additional one time expense:
-                        <input type="text" id="expense" name="expense" class="form-control form-control-lg" 
-                            placeholder="Expense">
-						
-						<input type="number" id="expenseAmount" name="expenseAmount" class="form-control form-control-lg" 
-                            placeholder="Amount" step="0.01">
-					</div>
-                    <div class="mb-3">
-                        <!-- Submit button -->
-                        
-                        <div class="d-grid gap-2">
-                            <input class="btn btn-primary" type="submit" value="ENTER"></input>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
-    </div>
-    
+
 </body>
 </html>
