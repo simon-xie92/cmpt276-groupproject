@@ -48,7 +48,7 @@
                 <form action="/monthlyExpenses" method="post">
                     <div class="mb-3">
                         Enter each of your Monthly Expenses ($/month):
-						<input type="text" id="expense" name="expense" class="form-control form-control-lg" 
+						<input type="text" id="monthlyExpense" name="monthlyExpense" class="form-control form-control-lg" 
                             placeholder="Monthly Expense">
 
 						<input type="number" id="monthlyExpenseAmount" name="monthlyExpenseAmount" class="form-control form-control-lg" 
@@ -64,9 +64,12 @@
                 </form>
                 <form action="/expenses" method="post">
                     <div class="mb-3">
-						Add the value of any additional one time expense:
+                        Add the value of any additional one time expense:
+                        <input type="text" id="expense" name="expense" class="form-control form-control-lg" 
+                            placeholder="Expense">
+						
 						<input type="number" id="expenseAmount" name="expenseAmount" class="form-control form-control-lg" 
-                            placeholder="Expense Amount">
+                            placeholder="Amount">
 					</div>
                     <div class="mb-3">
                         <!-- Submit button -->

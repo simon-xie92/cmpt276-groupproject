@@ -1,9 +1,11 @@
 package com.cmpt276.groupproject.controllers;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.dialect.function.LocatePositionEmulation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.stereotype.Controller;
@@ -20,12 +22,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import com.cmpt276.groupproject.models.TransactionRepository;
+import com.cmpt276.groupproject.models.Transaction;
+
+import java.time.LocalDate;
+
 @Controller
 public class UsersController {
     
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private TransactionRepository transactionRepo;
 
     @GetMapping("/")
     public RedirectView process(){
@@ -72,7 +82,11 @@ public class UsersController {
     @GetMapping("/checkBalance")
     public String getUserBalance(Model model, HttpServletRequest request, HttpSession session){
         User user = (User) session.getAttribute("session_user");
+        int userId = user.getUid();
+        System.out.println(userId);
+        List<Transaction> transaction = transactionRepo.findByUid(userId);
         model.addAttribute("us", user);
+        model.addAttribute("ts", transaction);
         return "users/account";
     }
     @PostMapping("/monthlyIncome")
@@ -94,7 +108,9 @@ public class UsersController {
     @PostMapping("/Income")
     public String Income(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
         double Income = Double.parseDouble(formData.get("incomeAmount"));
+        String reason = formData.get("income");
         User user = (User) session.getAttribute("session_user");
+        
 
         if (user == null){
             return "users/login";
@@ -104,8 +120,11 @@ public class UsersController {
             
             double updatedBalance = user.getBalance() + Income;
             System.out.println(updatedBalance);
+            LocalDate date = LocalDate.now();
             user.setBalance(updatedBalance);
             userRepo.save(user);
+            int userId = user.getUid();
+            transactionRepo.save(new Transaction(userId, date, "Deposit", Income));
             model.addAttribute("user", user);
             return getUserBalance(model, request, session);
         }
@@ -114,6 +133,7 @@ public class UsersController {
     @PostMapping("/expenses")
     public String Expenses(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
         double Expense = Double.parseDouble(formData.get("expenseAmount"));
+        String reason = formData.get("expense");
         User user = (User) session.getAttribute("session_user");
 
         if (user == null){
@@ -121,10 +141,16 @@ public class UsersController {
         }
         else {
             //success
-            
+        
             double updatedBalance = user.getBalance() - Expense;
             user.setBalance(updatedBalance);
             userRepo.save(user);
+            
+            LocalDate date = LocalDate.now();
+            int userId = user.getUid();
+            
+            transactionRepo.save(new Transaction(userId, date, "Withdrawl", Expense));
+
             model.addAttribute("user", user);
             return getUserBalance(model, request, session);
         }

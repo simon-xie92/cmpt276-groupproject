@@ -18,9 +18,19 @@
             
             <h3>Your Monthly Income:</h3>
             <p th:text="${user.monthlyincome}"></p>
-            <!---
-            <h2>Your Expenses</h2>
-            <p th:text="user:${expenses}"></p> --->
+           
+        </li>
+    </ul>
+    <ul>
+        <h3>Your Transactions</h3>
+        <li th:each="transaction:${ts}">
+            
+            
+            
+            <p th:text="${transaction.date}"></p><br>
+            <p th:text="${transaction.reason}"></p><br>
+            <p th:text="${transaction.amount}"></p><br>
+            
         </li>
     </ul>
     
