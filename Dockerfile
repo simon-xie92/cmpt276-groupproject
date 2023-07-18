@@ -4,6 +4,6 @@ RUN mvn clean package -DskipTests
 
 
 FROM openjdk:17-jdk-slim
-COPY --from=build /target/groupproject2-0.0.1-SNAPSHOT.jar groupproject.jar
+COPY --from=build /target/groupproject-0.0.1-SNAPSHOT.jar groupproject.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","groupproject.jar"]

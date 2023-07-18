@@ -3,20 +3,23 @@
 <head>
     <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
-    <title>Users</title>
-    <link rel="stylesheet" href="./stylesheets/style.css"/>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css"/>
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>LOGIN</h1>
-    <section>
-      <form action="/login" method="post">
+    <header>
+        <h1>Stock Buddy Login</h1>
+    </header>
+
+    <div class="Page">
+        <form action="/login" method="post">
           <input type="text" id="uname" name="uname" placeholder="username" required /> <br />
           <input type="password" id="upassword" name="upassword" placeholder="password" required /> <br />
-          <input class="btn btn-primary" type="submit" value="SEND">
+          <input class="btn btn-primary" type="submit" value="Login">
           
-      </form>
-      <button type = "button" onclick="location.href = '/signup.html'"> Sign up</button>
-    </section>
+        </form>
+        <button type = "button" onclick="location.href = '/signup.html'"> Sign up</button>
+    </div>
 </body>
 </html>

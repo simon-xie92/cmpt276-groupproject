@@ -13,6 +13,11 @@ header
     padding-bottom: 10px;
 }
 
+.Tabs nav ul
+{
+    text-align: center;
+}
+
 .Footer
 {
     text-align: center; 
@@ -88,6 +93,7 @@ h4
 
     .Tabs nav ul
     {
+        text-align: right;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
     }
