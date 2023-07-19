@@ -54,7 +54,7 @@ public class UsersController {
             return "users/login";
         } else {
             model.addAttribute("user", user);
-            return "users/homepage";
+            return home(model, request, session);
         }
     }
 
@@ -84,7 +84,7 @@ public class UsersController {
             User user = userlist.get(0);
             request.getSession().setAttribute("session_user", user);
             model.addAttribute("user", user);
-            return "users/homepage";
+            return home(model, request, session);
         }
     }
     @GetMapping("/checkBalance")
@@ -99,6 +99,19 @@ public class UsersController {
         model.addAttribute("ts", transaction);
         return "users/account";
     }
+
+    @GetMapping("/home")
+    public String home(Model model, HttpServletRequest request, HttpSession session){
+        User user = (User) session.getAttribute("session_user");
+        int userId = user.getUid();
+        if (user == null){
+            return "users/login";
+        }
+        System.out.println(userId);
+        model.addAttribute("us", user);
+        return "users/homepage";
+    }
+
     @PostMapping("/monthlyIncome")
     public String monthlyIncome(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
         double monthlyIncome = Double.parseDouble(formData.get("monthlyIncomeAmount"));

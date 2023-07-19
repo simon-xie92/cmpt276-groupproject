@@ -27,10 +27,10 @@
         </nav>
     </div>
 
-    <div class="grid-container">
+    <div class="grid-container" th:each="user:${us}">
         <section class="CurrentCumulativeTotal">
-            <h4>Current Cumulative Total</h4>
-            
+            <h4>Current Cumulative Total: </h4>
+            <p th:text="${user.balance}"></p>
         </section>
 
         <section class="Goals">
@@ -46,7 +46,8 @@
         </section>
 
         <section class="MonthlyBalance">
-            <h4>Monthly Balance</h4>
+            <h4>Monthly Balance:</h4>
+            <p th:text="${user.monthlysavings}"></p>
         </div>
     </div>
 
