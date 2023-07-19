@@ -1,0 +1,19 @@
+body
+{
+    margin: auto;
+    max-width: 500px;
+}
+
+h1
+{
+    color: gold;
+	font-size: 40px;
+	-webkit-text-stroke: 1px black;
+}
+
+.privacypolicy
+{
+    border: 4mm ridge rgba(17, 140, 79, .6);
+    padding: 20px;
+    text-align: center;
+}
