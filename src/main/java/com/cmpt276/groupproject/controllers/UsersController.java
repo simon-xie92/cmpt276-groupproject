@@ -25,6 +25,8 @@ import jakarta.servlet.http.HttpSession;
 import com.cmpt276.groupproject.models.TransactionRepository;
 import com.cmpt276.groupproject.models.Expense;
 import com.cmpt276.groupproject.models.ExpenseRepository;
+import com.cmpt276.groupproject.models.Goal;
+import com.cmpt276.groupproject.models.GoalRepository;
 import com.cmpt276.groupproject.models.Transaction;
 
 
@@ -42,6 +44,9 @@ public class UsersController {
 
     @Autowired
     private ExpenseRepository expenseRepo;
+
+    @Autowired
+    private GoalRepository goalRepo;
 
     @GetMapping("/")
     public RedirectView process(){
@@ -94,9 +99,11 @@ public class UsersController {
         System.out.println(userId);
         List<Transaction> transaction = transactionRepo.findByUid(userId);
         List<Expense> expense = expenseRepo.findByUid(userId);
+        List<Goal> goals = goalRepo.findByUid(userId);
         model.addAttribute("es", expense);
         model.addAttribute("us", user);
         model.addAttribute("ts", transaction);
+        model.addAttribute("gs", goals);
         return "users/account";
     }
 
@@ -107,9 +114,11 @@ public class UsersController {
         if (user == null){
             return "users/login";
         }
-        System.out.println(userId);
-        model.addAttribute("us", user);
-        return "users/homepage";
+        else{
+            System.out.println(userId);
+            model.addAttribute("us", user);
+            return "users/homepage";
+        }
     }
 
     @PostMapping("/monthlyIncome")
@@ -202,6 +211,29 @@ public class UsersController {
 
             model.addAttribute("user", user);
             return getUserBalance(model, request, session);
+        }
+    }
+
+    @PostMapping("/goals")
+    public String Goals(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
+        double cost = Double.parseDouble(formData.get("cost"));
+        String goal  = formData.get("goal");
+        User user = (User) session.getAttribute("session_user");
+
+        if (user == null){
+            return "users/login";
+        }
+        else {
+            //success
+
+            double monthlySavings = user.getMonthlysavings();
+            double balance = user.getBalance();
+            double time = (cost-balance)/monthlySavings;
+            int newTime = (int)time;
+            int userId = user.getUid();
+            goalRepo.save(new Goal(userId, goal, cost, newTime));
+            model.addAttribute("user", user);
+            return home(model, request, session);
         }
     }
 
