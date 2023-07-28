@@ -130,6 +130,7 @@ public class UsersController {
         }
         else {
             //success
+          
             double monthlyExpenses = user.getMonthlyexpenses();
             double monthlySavings = monthlyIncome - monthlyExpenses;
             user.setMonthlyincome(monthlyIncome);
