@@ -96,7 +96,6 @@ public class UsersController {
     public String getUserBalance(Model model, HttpServletRequest request, HttpSession session){
         User user = (User) session.getAttribute("session_user");
         int userId = user.getUid();
-        System.out.println(userId);
         List<Transaction> transaction = transactionRepo.findByUid(userId);
         List<Expense> expense = expenseRepo.findByUid(userId);
         List<Goal> goals = goalRepo.findByUid(userId);
