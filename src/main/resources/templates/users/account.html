@@ -9,40 +9,46 @@
     <script src='main.js'></script>
 </head>
 <body>
-    <button type = "button" onclick="location.href = '/login'"> Stock Buddy</button>
-    <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button><br>
-   
-    <ul>
-        <li th:each="user:${us}">
-            <h3>Your Balance:</h3>
-            <p th:text="${user.balance}"></p>
-            <h3>Your Monthly Income:</h3>
-            <p th:text="${user.monthlyincome}"></p>
-            <h3>Your Monthly Savings(Monthly Income - Monthly Expenses):</h3>
-            <p th:text="${user.monthlysavings}"></p>
-        </li>
-    </ul>
-    <ul>
-        <h3>Your Monthly Expenses</h3>
-        <li th:each="expense:${es}">
-            <p>Reason: <span th:text="${expense.reason}"></span>
-                , Amount:$<span th:text="${expense.amount}"></span>
-            </p>
-                
-        </li>
-    </ul>
-    <ul>
-        <h3>Your Transactions</h3>
-        <li th:each="transaction:${ts}">
-            <p>Date: <span th:text="${transaction.date}"></span>
-                , Reason: <span th:text="${transaction.reason}" ></span>
-                , Amount: <span th:text="${transaction.amount}"></span>
-                , Type: <span th:text="${transaction.type}"></span>
+
+    <header>
+        <h1>Stock Buddy</h1>
+    </header>
+    
+    <div class="account">
+        <ul>
+            <li th:each="user:${us}">
+                <h3>Your Balance:</h3>
+                <p th:text="${user.balance}"></p>
+                <h3>Your Monthly Income:</h3>
+                <p th:text="${user.monthlyincome}"></p>
+                <h3>Your Monthly Savings(Monthly Income - Monthly Expenses):</h3>
+                <p th:text="${user.monthlysavings}"></p>
+            </li>
+        </ul>
+        <ul>
+            <h3>Your Monthly Expenses</h3>
+            <li th:each="expense:${es}">
+                <p>Reason: <span th:text="${expense.reason}"></span>
+                    , Amount:$<span th:text="${expense.amount}"></span>
+                </p>
+                    
+            </li>
+        </ul>
+        <ul>
+            <h3>Your Transactions</h3>
+            <li th:each="transaction:${ts}">
+                <p>Date: <span th:text="${transaction.date}"></span>
+                    , Reason: <span th:text="${transaction.reason}" ></span>
+                    , Amount: <span th:text="${transaction.amount}"></span>
+                    , Type: <span th:text="${transaction.type}"></span>
+                </p>
             
-            </p>
-        
-        </li>
-    </ul>
+            </li>
+        </ul>
+
+        <button type = "button" onclick="location.href = '/login'"> Stock Buddy</button>
+        <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button><br>
+    </div>
     
 </body>
 </html>

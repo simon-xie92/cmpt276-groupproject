@@ -22,7 +22,7 @@
     
         <p th:text="${article.description}"></p>
     
-        <p><strong>URL:</strong> <a th:href="${article.url}" th:text="${article.url}" th:target="_blank"></a></p>
+        <p><strong>URL:</strong> <a th:href="${article.url}" th:text="link" th:target="_blank"></a></p>
         
         <p><strong>Published At:</strong> <span th:text="${article.publishedAt}"></span></p>
 </div>
