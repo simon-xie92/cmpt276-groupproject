@@ -28,21 +28,23 @@
     </div>
    
     <div class="grid-container">
-        <section class="CurrentCumulativeTotal" th:each="user:${us}" >
+        <section class="CurrentCumulativeTotal" >
             <h4>Current Cumulative Total: </h4>
             <p th:text="${user.balance}"></p>
         </section>
 
         <section class="Goals" >
             
-            <button type = "button" onclick="location.href = '/goals.html'"><h4>Goals</h4></button>
-            <span th:each="goals:${gs}">
-                <p>Test</p>
-                <p th:text="${goals.item}"></p>
-                
-            </span>
+            <button type = "button" onclick="location.href = '/goals.html'"><h4>Goals</h4></button><br>
+            <tr th:each="goals:${gs}">
+                <td th:text="${'Item:' + goals.item}"></td>
+                <td th:text="${'Cost:'+ goals.amount}"></td>
+                <td th:text="${'Estimated time until goal is reached (months):'+ goals.time}"></td>
+            </tr>
+          
         </section>
-
+        <p>Test</p>
+        
         <section class="MajorHeadlines">
             <h4>Major Headlines</h4>
         </section>
@@ -51,7 +53,7 @@
             <h4>Stocks</h4>
         </section>
 
-        <section class="MonthlyBalance" th:each="user:${us}">
+        <section class="MonthlyBalance"  >
             <h4>Monthly Balance:</h4>
             <p th:text="${user.monthlysavings}"></p>
         </div>

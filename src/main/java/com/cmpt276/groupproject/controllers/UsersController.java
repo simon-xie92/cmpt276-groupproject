@@ -115,8 +115,13 @@ public class UsersController {
             return "users/login";
         }
         else{
-            System.out.println(userId);
+            List<Transaction> transaction = transactionRepo.findByUid(userId);
+            List<Expense> expense = expenseRepo.findByUid(userId);
+            List<Goal> goals = goalRepo.findByUid(userId);
             model.addAttribute("us", user);
+            model.addAttribute("es", expense);
+            model.addAttribute("ts", transaction);
+            model.addAttribute("gs", goals);
             return "users/homepage";
         }
     }
