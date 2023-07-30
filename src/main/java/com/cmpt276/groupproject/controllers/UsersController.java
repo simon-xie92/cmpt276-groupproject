@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cmpt276.groupproject.models.UserRepository;
 import com.cmpt276.groupproject.models.User;
@@ -143,6 +144,10 @@ public class UsersController {
     @PostMapping("/monthlyExpenses")
     public String monthlyExpenses(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
         double monthlyExpense = Double.parseDouble(formData.get("monthlyExpenseAmount"));
+        String testMonthlyExpense = formData.get("monthlyExpenseAmount");
+        if(testMonthlyExpense == null){
+            return getUserBalance(model, request, session);
+        }
         String reason = formData.get("monthlyExpense");
         User user = (User) session.getAttribute("session_user");
 
@@ -161,6 +166,24 @@ public class UsersController {
             model.addAttribute("user", user);
             return getUserBalance(model, request, session);
         }
+    }
+
+    @GetMapping("/deleteExpense/{eid}")
+    public String deleteExpense (Model model, HttpServletRequest request, HttpSession session, @PathVariable String eid){
+        User user = (User) session.getAttribute("session_user");
+        int id=Integer.parseInt(eid);
+        System.out.println(eid);
+        Expense exp=expenseRepo.findByEid(id).get(0);
+        double expenseVal = exp.getAmount();
+        double monthlyExpenses = user.getMonthlyexpenses() - expenseVal;
+        double monthlySavings = user.getMonthlyincome() - monthlyExpenses;
+        user.setMonthlyexpenses(monthlyExpenses);
+        user.setMonthlysavings(monthlySavings);
+        userRepo.save(user);
+        expenseRepo.delete(exp);
+        List<Expense> expense = expenseRepo.findAll();
+        model.addAttribute("us", expense);
+        return getUserBalance(model, request, session);
     }
 
     @PostMapping("/Income")

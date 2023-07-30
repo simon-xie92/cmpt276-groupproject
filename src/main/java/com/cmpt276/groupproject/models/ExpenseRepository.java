@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface ExpenseRepository extends JpaRepository<Expense,Integer> {
     List<Expense> findByUid(int uid);
+    List<Expense> findByEid(int eid);
 }
