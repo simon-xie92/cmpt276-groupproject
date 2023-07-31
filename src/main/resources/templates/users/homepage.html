@@ -44,7 +44,7 @@
                 </tr>
                 <tr th:each="goals:${gs}">
                     <td th:text="${goals.item}"></td>
-                    <td th:text="${goals.amount}"></td>
+                    <td th:text="${'$' + goals.amount}"></td>
                     <td th:text="${goals.time}"></td>
                     <td>
                         <form th:action="@{/deleteGoal/{gid}(gid=${goals.gid})}" method="get">

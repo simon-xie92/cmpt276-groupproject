@@ -26,7 +26,7 @@
     <section th:each="expense:${es}">
         
         <p>Reason: <span th:text="${expense.reason}"></span>
-            , Amount:$<span th:text="${expense.amount}"></span>
+            , Amount:$<span th:text="${'$' + expense.amount}"></span>
         </p>
         <form th:action="@{/deleteExpense/{eid}(eid=${expense.eid})}" method="get">
             <input class="btn btn-primary" type="submit" value="REMOVE"></input>
