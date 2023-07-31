@@ -1,1 +1,28 @@
-To Be Added
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <html xmlns:th="http://www.thymeleaf.org"></html>
+    <title>stocks</title>
+</head>
+<body>
+
+    <h1>stocks</h1>
+    <table>
+        <tr>
+            <th>Symbol</th>
+            <th>Short Name</th>
+            <th>Quote Type</th>
+            <th>Price</th>
+        </tr>
+        <tr th:each="quote : ${quotes}">
+            <td th:text="${quote.symbol}"></td>
+            <td th:text="${quote.shortname}"></td>
+            <td th:text="${quote.quoteType}"></td>
+            <td th:text="${quote.price}"></td>
+        </tr>
+    </table>
+    
+</body>
+</html>

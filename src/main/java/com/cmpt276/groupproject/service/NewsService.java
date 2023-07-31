@@ -13,6 +13,6 @@ public class NewsService {
     public NewsApiResponse getNews(String country, String category) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<NewsApiResponse> response = restTemplate.getForEntity(API_URL, NewsApiResponse.class, country, category);
-        return response.getBody();
+        return response.getBody(); 
     }
 }
