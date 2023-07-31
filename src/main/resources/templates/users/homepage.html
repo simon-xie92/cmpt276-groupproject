@@ -36,12 +36,23 @@
         <section class="Goals" >
             
             <button type = "button" onclick="location.href = '/goals.html'"><h4>Goals</h4></button><br>
-            <tr th:each="goals:${gs}">
-                <td th:text="${'Item:' + goals.item}"></td>
-                <td th:text="${'Cost:'+ goals.amount}"></td>
-                <td th:text="${'Estimated time until goal is reached (months):'+ goals.time}"></td>
-            </tr>
-          
+            <table>
+                <tr>
+                    <th>Item:</th>
+                    <th>Cost:</th>
+                    <th>Estimated time until goal is reached (months):</th>
+                </tr>
+                <tr th:each="goals:${gs}">
+                    <td th:text="${goals.item}"></td>
+                    <td th:text="${goals.amount}"></td>
+                    <td th:text="${goals.time}"></td>
+                    <td>
+                        <form th:action="@{/deleteGoal/{gid}(gid=${goals.gid})}" method="get">
+                            <input class="btn btn-primary" type="submit" value="REMOVE"></input>
+                        </form>
+                    </td>
+                </tr>
+           </table>
         </section>
         <p>Test</p>
         

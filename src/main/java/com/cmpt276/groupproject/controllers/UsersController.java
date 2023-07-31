@@ -113,6 +113,7 @@ public class UsersController {
         int userId = user.getUid();
         if (user == null){
             return "users/login";
+
         }
         else{
             List<Transaction> transaction = transactionRepo.findByUid(userId);
@@ -177,7 +178,6 @@ public class UsersController {
     public String deleteExpense (Model model, HttpServletRequest request, HttpSession session, @PathVariable String eid){
         User user = (User) session.getAttribute("session_user");
         int id=Integer.parseInt(eid);
-        System.out.println(eid);
         Expense exp=expenseRepo.findByEid(id).get(0);
         double expenseVal = exp.getAmount();
         double monthlyExpenses = user.getMonthlyexpenses() - expenseVal;
@@ -187,8 +187,22 @@ public class UsersController {
         userRepo.save(user);
         expenseRepo.delete(exp);
         List<Expense> expense = expenseRepo.findAll();
-        model.addAttribute("us", expense);
+        model.addAttribute("ex", expense);
         return getUserBalance(model, request, session);
+    }
+
+    @GetMapping("/deleteGoal/{gid}")
+    public String deleteGoal (Model model, HttpServletRequest request, HttpSession session, @PathVariable String gid){
+        User user = (User) session.getAttribute("session_user");
+        if(user == null){
+            return login(null, model, request, session);
+        }
+        int id=Integer.parseInt(gid);
+        Goal goal = goalRepo.findByGid(id).get(0);
+        goalRepo.delete(goal);
+        List<Goal> findgoal = goalRepo.findAll();
+        model.addAttribute("go", findgoal);
+        return getLogin(model, request, session);
     }
 
     @PostMapping("/Income")
