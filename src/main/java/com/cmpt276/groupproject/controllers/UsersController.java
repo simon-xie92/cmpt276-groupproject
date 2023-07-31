@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -29,6 +30,7 @@ import com.cmpt276.groupproject.models.ExpenseRepository;
 import com.cmpt276.groupproject.models.Goal;
 import com.cmpt276.groupproject.models.GoalRepository;
 import com.cmpt276.groupproject.models.Transaction;
+
 
 
 import java.time.LocalDate;
@@ -123,6 +125,8 @@ public class UsersController {
             model.addAttribute("es", expense);
             model.addAttribute("ts", transaction);
             model.addAttribute("gs", goals);
+
+
             return "users/homepage";
         }
     }
