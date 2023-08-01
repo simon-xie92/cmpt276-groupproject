@@ -18,6 +18,11 @@ h1
     margin-bottom: 10px;
 }
 
+.account button
+{
+    margin: 10px;
+}
+
 .account ul
 {
     margin-bottom: 35px;
