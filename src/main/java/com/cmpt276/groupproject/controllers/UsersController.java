@@ -19,16 +19,20 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cmpt276.groupproject.models.UserRepository;
+import com.cmpt276.groupproject.service.NewsService;
 import com.cmpt276.groupproject.models.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import com.cmpt276.groupproject.controllers.NewsController;
 
 import com.cmpt276.groupproject.models.TransactionRepository;
+import com.cmpt276.groupproject.models.Article;
 import com.cmpt276.groupproject.models.Expense;
 import com.cmpt276.groupproject.models.ExpenseRepository;
 import com.cmpt276.groupproject.models.Goal;
 import com.cmpt276.groupproject.models.GoalRepository;
+import com.cmpt276.groupproject.models.NewsApiResponse;
 import com.cmpt276.groupproject.models.Transaction;
 
 
@@ -50,6 +54,9 @@ public class UsersController {
 
     @Autowired
     private GoalRepository goalRepo;
+
+    @Autowired
+    private NewsService newsService;
 
     @GetMapping("/")
     public RedirectView process(){
@@ -121,10 +128,12 @@ public class UsersController {
             List<Transaction> transaction = transactionRepo.findByUid(userId);
             List<Expense> expense = expenseRepo.findByUid(userId);
             List<Goal> goals = goalRepo.findByUid(userId);
+            List<Article> headlines = newsService.getNews("Stocks").getArticles();
             model.addAttribute("us", user);
             model.addAttribute("es", expense);
             model.addAttribute("ts", transaction);
             model.addAttribute("gs", goals);
+            model.addAttribute("headlines", headlines);
 
 
             return "users/homepage";
