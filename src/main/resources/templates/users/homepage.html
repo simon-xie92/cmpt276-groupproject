@@ -30,9 +30,9 @@
     <div class="grid-container">
         <section class="CurrentCumulativeTotal" >
             <h4>Current Cumulative Total: </h4>
-            <p th:text="${user.balance}"></p>
+            <p th:text="${'$'+ user.balance}"></p>
             <p>Interested in Growing Your Wealth?</p>
-            <p>Use our <button type = "button" onclick="location.href = '/interestCalc.html'">Interest Calculator</button> to consider your money by putting money in a  </p>
+            <p>Use our <button type = "button" onclick="location.href = '/interestCalc.html'">Interest Calculator</button> to consider your growing your wealth by putting money in a Savings Account or GIC </p>
             <p><button type = "button" onclick="location.href = '/stocks.html'">Click Here</button> to purchase stocks</p>
 
 
@@ -85,7 +85,7 @@
 
         <section class="MonthlyBalance"  >
             <h4>Monthly Balance:</h4>
-            <p th:text="${user.monthlysavings}"></p>
+            <p th:text="${'$' + user.monthlysavings}"></p>
         </div>
     </div>
 
