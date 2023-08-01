@@ -3,26 +3,35 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Goals</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='goals.css'>
     <script src='main.js'></script>
 </head>
 <body>
-    <form action="/goals" method="post">
+
+    <header>
+      <h1>Goals</h1>  
+    </header>
+
+    <div class="goals">
+        <form action="/goals" method="post">    
+
+            <div>
+                Enter something you would like to purchase in the future:
+                <input type="text" id="goal" name="goal" class="form-control form-control-lg" 
+                    placeholder="Goal">
+
+                <input type="number" id="cost" name="cost" class="form-control form-control-lg" 
+                    placeholder="Cost of Goal" step="0.01">
+                <!-- Submit button -->
                 
+                <input class="button" type="submit" value="ENTER"></input>
+            </div>
+        </form>
+        
+        <button class="returnButton" type="button" onclick="location.href = '/login'"> Stock Buddy</button>
 
-        <div>
-            Enter something you would like to purchase in the future:
-            <input type="text" id="goal" name="goal" class="form-control form-control-lg" 
-                placeholder="Goal">
-
-            <input type="number" id="cost" name="cost" class="form-control form-control-lg" 
-                placeholder="Cost of Goal" step="0.01">
-            <!-- Submit button -->
-            
-            <input class="button" type="submit" value="ENTER"></input>
-        </div>
-    </form>
+    </div>
 </body>
 </html>
