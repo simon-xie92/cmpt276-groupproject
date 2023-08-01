@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Candlestick Data</title>
+</head>
+<body>
+    <h1>Candlestick Data</h1>
+
+    <div th:if="${candleData != null}">
+        <h2>Timestamps:</h2>
+        <ul>
+            <li th:each="timestamp : ${candleData.t}">
+                <span th:text="${timestamp}"></span>
+            </li>
+        </ul>
+
+        <h2>Open Prices:</h2>
+        <ul>
+            <li th:each="openPrice : ${candleData.o}">
+                <span th:text="${openPrice}"></span>
+            </li>
+        </ul>
+
+        <!-- Repeat for high prices, low prices, and close prices -->
+    </div>
+
+    <div th:if="${candleData == null}">
+        <p>No candlestick data available.</p>
+    </div>
+</body>
+</html>
