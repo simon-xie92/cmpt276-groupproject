@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stocks</title>
+</head>
+<body>
+    <h1>Stocks</h1>
+
+    <form th:action="@{/stocks}" method="get">
+        <label for="symbol">Symbol</label>
+        <input type="text" id="symbol" name="symbol" placeholder="Enter symbol">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Quote</h2>
+    <p><strong>c:</strong> <span th:text="${quote.c}"></span></p>
+    <p><strong>h:</strong> <span th:text="${quote.h}"></span></p>
+    <p><strong>l:</strong> <span th:text="${quote.l}"></span></p>
+    <p><strong>o:</strong> <span th:text="${quote.o}"></span></p>
+    <p><strong>pc:</strong> <span th:text="${quote.pc}"></span></p>
+    <p><strong>dp:</strong> <span th:text="${quote.dp}"></span></p>
+    <p><strong>d:</strong> <span th:text="${quote.d}"></span></p>
+
+    <h2>Recommendations</h2>
+    <div th:each="recommendation : ${recommendations}">
+        <p><strong>Buy:</strong> <span th:text="${recommendation.buy}"></span></p>
+        <p><strong>Hold:</strong> <span th:text="${recommendation.hold}"></span></p>
+        <p><strong>Period:</strong> <span th:text="${recommendation.period}"></span></p>
+        <p><strong>Sell:</strong> <span th:text="${recommendation.sell}"></span></p>
+        <p><strong>Strong Buy:</strong> <span th:text="${recommendation.strongBuy}"></span></p>
+        <p><strong>Strong Sell:</strong> <span th:text="${recommendation.strongSell}"></span></p>
+        <p><strong>Symbol:</strong> <span th:text="${recommendation.symbol}"></span></p>
+    </div>
+
+    <h2>News</h2>
+    <div th:each="newsItem : ${news}">
+        <p><strong>Category:</strong> <span th:text="${newsItem.category}"></span></p>
+        <p><strong>Datetime:</strong> <span th:text="${newsItem.datetime}"></span></p>
+        <p><strong>Headline:</strong> <span th:text="${newsItem.headline}"></span></p>
+        <p><strong>Id:</strong> <span th:text="${newsItem.id}"></span></p>
+        <p><strong>Image:</strong> <span th:text="${newsItem.image}"></span></p>
+        <p><strong>Related:</strong> <span th:text="${newsItem.related}"></span></p>
+        <p><strong>Source:</strong> <span th:text="${newsItem.source}"></span></p>
+        <p><strong>Summary:</strong> <span th:text="${newsItem.summary}"></span></p>
+        <p><strong>URL:</strong> <a th:href="${newsItem.url}" th:text="${newsItem.url}"></a></p>
+    </div>
+</body>
+</html>
