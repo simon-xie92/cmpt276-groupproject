@@ -12,9 +12,10 @@
         <h1>News</h1>
     </header>
 
-    <form class="Search" action="/news" method="GET">
-        <input type="text" name="q" placeholder="Search for news..." required>
-        <input type="submit" value="Search">
+    <form action="/news" method="GET">
+        <input id="SearchBox" type="text" name="q" placeholder="Search for news..." required>
+        <input id="SearchButton" type="submit" value="Search">
+        <button type = "button" onclick="location.href = '/login'"> Stock Buddy</button>
     </form>
 
     <div class="news" th:each="article : ${articles}">
@@ -30,6 +31,7 @@
         <p><strong>URL:</strong> <a th:href="${article.url}" th:text="link" th:target="_blank"></a></p>
         
         <p><strong>Published At:</strong> <span th:text="${article.publishedAt}"></span></p>
-</div>
+    </div>
+    
 </body>
 </html>
