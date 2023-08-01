@@ -27,20 +27,21 @@
         </nav>
     </div>
     <a class="twitter-timeline" href="https://twitter.com/StockBuddySFU?ref_src=twsrc%5Etfw">Tweets by StockBuddySFU</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
     <div class="grid-container">
         <section class="CurrentCumulativeTotal" >
             <h4>Current Cumulative Total: </h4>
             <p th:text="${'$'+ user.balance}"></p>
             <p>Interested in Growing Your Wealth?</p>
-            <p>Use our <button type = "button" onclick="location.href = '/interestCalc.html'">Interest Calculator</button> to consider your growing your wealth by putting money in a Savings Account or GIC </p>
-            <p><button type = "button" onclick="location.href = '/stocks.html'">Click Here</button> to purchase stocks</p>
+            <p>Use our <button class="innerButton" type = "button" onclick="location.href = '/interestCalc.html'">Interest Calculator</button> to consider your growing your wealth by putting money in a Savings Account or GIC </p>
+            <p><button class="innerButton" type = "button" onclick="location.href = '/stocks.html'">Click Here</button> to purchase stocks</p>
 
 
         </section>
 
         <section class="Goals" >
             
-            <button type = "button" onclick="location.href = '/goals.html'"><h4>Goals</h4></button><br>
+            <button class="innerButtonHeader" type = "button" onclick="location.href = '/goals.html'"><h4>Goals</h4></button><br>
             <table>
                 <tr>
                     <th>Item:</th>
@@ -63,19 +64,17 @@
         <section class="MajorHeadlines">
             <h4>Major Headlines</h4>
 
-            <div class="news" th:each="article, stat : ${headlines}" th:if="${stat.count <= 2}">
-    
-                <h2 th:text="${article.title}"></h2>
+            <h2 th:text="${article.title}"></h2>
             
-                <p><strong>Author:</strong> <span th:text="${article.author}"></span></p>
+            <p><strong>Author:</strong> <span th:text="${article.author}"></span></p>
+        
+            <p><strong>Source:</strong> <span th:text="${article.source.name}"></span></p>
+        
+            <p th:text="${article.description}"></p>
+        
+            <p><strong>URL:</strong> <a th:href="${article.url}" th:text="link" th:target="_blank"></a></p>
             
-                <p><strong>Source:</strong> <span th:text="${article.source.name}"></span></p>
-            
-                <p th:text="${article.description}"></p>
-            
-                <p><strong>URL:</strong> <a th:href="${article.url}" th:text="link" th:target="_blank"></a></p>
-                
-                <p><strong>Published At:</strong> <span th:text="${article.publishedAt}"></span></p>
+            <p><strong>Published At:</strong> <span th:text="${article.publishedAt}"></span></p>
             
         </section>
 
@@ -88,8 +87,6 @@
             <p th:text="${'$' + user.monthlysavings}"></p>
         </div>
     </div>
-
-    
 
     <!-- for help, contact, copyright -->
     <div class="Footer">
