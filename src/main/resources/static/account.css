@@ -74,3 +74,8 @@ button:hover
     color: #fff;
     background-color: rgba(17, 140, 79, .6);
 }
+
+.buttons
+{
+    margin-top: 10px;
+}

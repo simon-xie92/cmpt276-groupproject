@@ -9,48 +9,56 @@
     <script src='main.js'></script>
 </head>
 <body>
-    <button type = "button" onclick="location.href = '/login'"> Stock Buddy</button>
-    <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button><br>
-   
-    
-    <section th:each="user:${us}">
-        <h3>Your Balance:</h3>
-        <p th:text="${user.balance}"></p>
-        <h3>Your Monthly Income:</h3>
-        <p th:text="${user.monthlyincome}"></p>
-        <h3>Your Monthly Savings(Monthly Income - Monthly Expenses):</h3>
-        <p th:text="${user.monthlysavings}"></p>
-     </section>
-    
-    <h3>Your Monthly Expenses:</h3>
-    <section th:each="expense:${es}">
-        
-        <p>Reason: <span th:text="${expense.reason}"></span>
-            &emsp; Amount: $<span th:text="${expense.amount}"></span>
-        </p>
-        <form th:action="@{/deleteExpense/{eid}(eid=${expense.eid})}" method="get">
-            <input class="btn btn-primary" type="submit" value="REMOVE"></input>
-        </form>
-    </section>
 
-    <h3>Your Transactions</h3>
-    <table>
-        <tr>
-            <th>Date:</th>
-            <th>Reason:</th>
-            <th>Amount:</th>
-            <th>Type:</th>
-        </tr>
-        <tr th:each="transaction:${ts}">
-                <td th:text="${transaction.date}"></td>
-                <td th:text="${transaction.reason}" ></td>
-                <td th:text="${transaction.amount}"></td>
-                <td th:text="${transaction.type}"></td>
-            
-            </p>
+   <header>
+        <h1>Your Account</h1>
+    </header>
+    
+    <div class="account">
+        <section th:each="user:${us}">
+            <h3>Your Balance:</h3>
+            <p th:text="${user.balance}"></p>
+            <h3>Your Monthly Income:</h3>
+            <p th:text="${user.monthlyincome}"></p>
+            <h3>Your Monthly Savings(Monthly Income - Monthly Expenses):</h3>
+            <p th:text="${user.monthlysavings}"></p>
+        </section>
         
-        </tr>
-    </table>
+        <h3>Your Monthly Expenses:</h3>
+        <section th:each="expense:${es}">
+            
+            <p>Reason: <span th:text="${expense.reason}"></span>
+                &emsp; Amount: $<span th:text="${expense.amount}"></span>
+            </p>
+            <form th:action="@{/deleteExpense/{eid}(eid=${expense.eid})}" method="get">
+                <input class="btn btn-primary" type="submit" value="REMOVE"></input>
+            </form>
+        </section>
+
+        <h3>Your Transactions</h3>
+        <table>
+            <tr>
+                <th>Date:</th>
+                <th>Reason:</th>
+                <th>Amount:</th>
+                <th>Type:</th>
+            </tr>
+            <tr th:each="transaction:${ts}">
+                    <td th:text="${transaction.date}"></td>
+                    <td th:text="${transaction.reason}" ></td>
+                    <td th:text="${transaction.amount}"></td>
+                    <td th:text="${transaction.type}"></td>
+                
+                </p>
+            
+            </tr>
+        </table>
+
+        <div class="buttons">
+            <button type = "button" onclick="location.href = '/login'"> Stock Buddy</button>
+            <button type = "button" onclick="location.href = '/updateBalance.html'">Click to Update Balance</button><br>
+        </div>
+    </div>
     
 </body>
 </html>
