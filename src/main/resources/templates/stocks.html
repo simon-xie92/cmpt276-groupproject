@@ -13,36 +13,31 @@
     </form>
 
     <h2>Quote</h2>
-    <p><strong>c:</strong> <span th:text="${quote.c}"></span></p>
-    <p><strong>h:</strong> <span th:text="${quote.h}"></span></p>
-    <p><strong>l:</strong> <span th:text="${quote.l}"></span></p>
-    <p><strong>o:</strong> <span th:text="${quote.o}"></span></p>
-    <p><strong>pc:</strong> <span th:text="${quote.pc}"></span></p>
-    <p><strong>dp:</strong> <span th:text="${quote.dp}"></span></p>
-    <p><strong>d:</strong> <span th:text="${quote.d}"></span></p>
+    <p><strong>Current price:</strong> <span th:text="${quote.c}"></span>
+    <strong>High price of the day:</strong> <span th:text="${quote.h}"></span>
+    <strong>Low price of the day:</strong> <span th:text="${quote.l}"></span>
+    <strong>Open price of the day:</strong> <span th:text="${quote.o}"></span></p>
+    <p><strong>Previous close price:</strong> <span th:text="${quote.pc}"></span>
+    <strong>Percent change:</strong> <span th:text="${quote.dp}"></span>
+    <strong>Change:</strong> <span th:text="${quote.d}"></span></p>
 
-    <h2>Recommendations</h2>
-    <div th:each="recommendation : ${recommendations}">
-        <p><strong>Buy:</strong> <span th:text="${recommendation.buy}"></span></p>
-        <p><strong>Hold:</strong> <span th:text="${recommendation.hold}"></span></p>
+    <h2>Recommendations (Number of Analysts recommending different strategies)</h2>
+    <div th:each="recommendation, stat : ${recommendations}" th:if="${stat.count <= 2}">
         <p><strong>Period:</strong> <span th:text="${recommendation.period}"></span></p>
-        <p><strong>Sell:</strong> <span th:text="${recommendation.sell}"></span></p>
-        <p><strong>Strong Buy:</strong> <span th:text="${recommendation.strongBuy}"></span></p>
-        <p><strong>Strong Sell:</strong> <span th:text="${recommendation.strongSell}"></span></p>
-        <p><strong>Symbol:</strong> <span th:text="${recommendation.symbol}"></span></p>
+        <p><strong>Buy:</strong> <span th:text="${recommendation.buy}"></span>
+        <strong>Hold:</strong> <span th:text="${recommendation.hold}"></span>
+        <strong>Sell:</strong> <span th:text="${recommendation.sell}"></span></p>
+        <p><strong>Strong Buy:</strong> <span th:text="${recommendation.strongBuy}"></span>
+        <strong>Strong Sell:</strong> <span th:text="${recommendation.strongSell}"></span>
+        <strong>Symbol:</strong> <span th:text="${recommendation.symbol}"></span></p>
     </div>
 
     <h2>News</h2>
-    <div th:each="newsItem : ${news}">
-        <p><strong>Category:</strong> <span th:text="${newsItem.category}"></span></p>
-        <p><strong>Datetime:</strong> <span th:text="${newsItem.datetime}"></span></p>
-        <p><strong>Headline:</strong> <span th:text="${newsItem.headline}"></span></p>
-        <p><strong>Id:</strong> <span th:text="${newsItem.id}"></span></p>
-        <p><strong>Image:</strong> <span th:text="${newsItem.image}"></span></p>
-        <p><strong>Related:</strong> <span th:text="${newsItem.related}"></span></p>
+    <div th:each="newsItem, stat : ${news}" th:if="${stat.count <= 2}">
+        <p><h3><strong> <span th:text="${newsItem.headline}"></span></strong></h3></p>
         <p><strong>Source:</strong> <span th:text="${newsItem.source}"></span></p>
         <p><strong>Summary:</strong> <span th:text="${newsItem.summary}"></span></p>
-        <p><strong>URL:</strong> <a th:href="${newsItem.url}" th:text="${newsItem.url}"></a></p>
+        <p><strong><a th:href="${newsItem.url}" th:text="${newsItem.url}"></a></strong></p>
     </div>
 </body>
 </html>

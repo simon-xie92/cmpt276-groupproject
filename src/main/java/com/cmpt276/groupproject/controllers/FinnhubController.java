@@ -31,7 +31,7 @@ public class FinnhubController {
     }
 
     @GetMapping("/stocks")
-    public ModelAndView getStockData(@RequestParam (defaultValue= "aapl") String symbol)
+    public ModelAndView getStockData(@RequestParam (defaultValue= " ") String symbol)
     {
         RecommendationTrend[] recommendations = finnhubService.getRecommendationTrends(symbol);
         quote quoteresponse = finnhubService.getQuote(symbol);
