@@ -69,6 +69,11 @@ header
     padding: 10px;
 }
 
+.news
+{
+    margin-left: 10px;
+}
+
 .Stock
 {
     border: 4mm ridge rgba(17, 140, 79, .6);
