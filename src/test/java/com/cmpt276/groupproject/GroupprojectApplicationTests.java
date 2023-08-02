@@ -9,7 +9,7 @@ import com.cmpt276.groupproject.models.User;
 class GroupprojectApplicationTests {
 
 	@Test
-	void testSignup() {
+	void testUser() {
 		User user = new User("testing", "testing", 123, 456, 78, 910);
 		String name = user.getName();
 		assertEquals("testing",name);
@@ -22,6 +22,8 @@ class GroupprojectApplicationTests {
 		double monthlysavings = user.getMonthlysavings();
 		assertEquals(910, monthlysavings);
 	}
+
+
 
 	
 
