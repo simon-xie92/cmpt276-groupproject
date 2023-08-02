@@ -23,4 +23,6 @@ public class UserService {
         return (User) session.getAttribute("session_user");
     }
 
+}
+
     
