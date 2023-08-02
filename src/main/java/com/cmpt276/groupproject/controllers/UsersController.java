@@ -142,43 +142,44 @@ private StockService stockService;
     }
 
     @GetMapping("/home")
-    public String home(Model model, HttpServletRequest request, HttpSession session){
-        User user = (User) session.getAttribute("session_user");
-        int userId = user.getUid();
-        if (user == null){
-            return "users/login";
-
-        }
-        else{
-            List<Transaction> transaction = transactionRepo.findByUid(userId);
-            List<Expense> expense = expenseRepo.findByUid(userId);
-            List<Goal> goals = goalRepo.findByUid(userId);
-            List<Article> headlines = newsService.getNews("Stocks").getArticles();
-
-            
-    List<Stock> stocks = stockService.getStocksForUser(user);
-    List<PortfolioItem> portfolioItems = new ArrayList<>();
-    for (Stock stock : stocks) {
-        quote quote = finnhubService.getQuote(stock.getSymbol());
-        RecommendationTrend[] recommendations = finnhubService.getRecommendationTrends(stock.getSymbol());
-        News[] news = finnhubService.getNews(stock.getSymbol(), "2023-01-01", "2023-12-31");
-        PortfolioItem item = new PortfolioItem();
-        item.setStock(stock);
-        item.setQuote(quote);
-        item.setRecommendations(recommendations);
-        item.setNews(news);
-        portfolioItems.add(item);
+public String home(Model model, HttpServletRequest request, HttpSession session){
+    User user = (User) session.getAttribute("session_user");
+    int userId = user.getUid();
+    if (user == null){
+        return "users/login";
     }
-            model.addAttribute("es", expense);
-            model.addAttribute("ts", transaction);
-            model.addAttribute("gs", goals);
-            model.addAttribute("headlines", headlines);
-            model.addAttribute("portfolio", portfolioItems);
+    else{
+        List<Transaction> transaction = transactionRepo.findByUid(userId);
+        List<Expense> expense = expenseRepo.findByUid(userId);
+        List<Goal> goals = goalRepo.findByUid(userId);
+        List<Article> headlines = newsService.getNews("Stocks").getArticles();
 
-
-            return "users/homepage";
+        List<Stock> stocks = stockService.getStocksForUser(user);
+        List<PortfolioItem> portfolioItems = new ArrayList<>();
+        double totalProfitLoss = 0;
+        for (Stock stock : stocks) {
+            quote quote = finnhubService.getQuote(stock.getSymbol());
+            RecommendationTrend[] recommendations = finnhubService.getRecommendationTrends(stock.getSymbol());
+            News[] news = finnhubService.getNews(stock.getSymbol(), "2023-01-01", "2023-12-31");
+            PortfolioItem item = new PortfolioItem();
+            item.setStock(stock);
+            item.setQuote(quote);
+            item.setRecommendations(recommendations);
+            item.setNews(news);
+            portfolioItems.add(item);
+            double profitLoss = (quote.getC() - stock.getPurchasePrice()) * stock.getQuantity();
+            totalProfitLoss += profitLoss;
         }
+        model.addAttribute("es", expense);
+        model.addAttribute("ts", transaction);
+        model.addAttribute("gs", goals);
+        model.addAttribute("headlines", headlines);
+        model.addAttribute("portfolio", portfolioItems);
+        model.addAttribute("totalProfitLoss", totalProfitLoss);
+
+        return "users/homepage";
     }
+}
 
     @PostMapping("/monthlyIncome")
     public String monthlyIncome(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session){
@@ -255,7 +256,7 @@ private StockService stockService;
         goalRepo.delete(goal);
         List<Goal> findgoal = goalRepo.findAll();
         model.addAttribute("go", findgoal);
-        return getLogin(model, request, session);
+        return "redirect:/goals";
     }
 
     @PostMapping("/Income")

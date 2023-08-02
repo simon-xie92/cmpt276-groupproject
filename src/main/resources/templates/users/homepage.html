@@ -30,13 +30,11 @@
     <a class="twitter-timeline" href="https://twitter.com/StockBuddySFU?ref_src=twsrc%5Etfw">Tweets by StockBuddySFU</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <div class="grid-container">
         <section class="CurrentCumulativeTotal" >
-            <h3>Current Cumulative Total: </h3>
-            <p th:text="${'$'+ user.balance}"></p>
+            <h3>Total Profit/Loss from Stocks: </h3>
+            <p th:text="${'$'+ totalProfitLoss}"></p>
             <p>Interested in Growing Your Wealth?</p>
             <p>Use our <button class="innerButton" type = "button" onclick="location.href = '/interestCalc.html'">Interest Calculator</button> to consider your growing your wealth by putting money in a Savings Account or GIC </p>
             <p><button class="innerButton"type = "button" onclick="location.href = '/stocks'">Click Here</button> to look at stocks</p>
-
-
         </section>
 
         <section class="Goals" >
@@ -53,7 +51,7 @@
                     <td th:text="${'$' + goals.amount}"></td>
                     <td th:text="${goals.time}"></td>
                     <td>
-                        <form th:action="@{/deleteGoal/{gid}(gid=${goals.gid})}" method="get">
+                        <form th:action="@{/deleteGoal/{gid}(gid=${goals.gid})}" method="GET">
                             <input class="btn btn-primary" type="submit" value="REMOVE"></input>
                         </form>
                     </td>
