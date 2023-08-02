@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Portfolio</title>
+</head>
+<body>
+    <h1>Portfolio</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Purchase Price</th>
+                <th>Current Price</th>
+                <th>Quantity</th>
+                <th>Profit/Loss</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="stock : ${stocks}">
+                <td th:text="${stock.symbol}"></td>
+                <td th:text="${stock.purchasePrice}"></td>
+                <td th:text="${stock.currentPrice}"></td>
+                <td th:text="${stock.quantity}"></td>
+                <td th:text="${(stock.currentPrice - stock.purchasePrice) * stock.quantity}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,5 +1,8 @@
 package com.cmpt276.groupproject.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +18,9 @@ public class User {
     private double monthlyexpenses;
     private double monthlysavings;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Stock> stocks = new ArrayList<>();
+
     public User(){
         
     }
@@ -26,6 +32,7 @@ public class User {
         this.monthlyincome = monthlyincome;
         this.monthlyexpenses = monthlyexpenses;
         this.monthlysavings = monthlysavings;
+        this.stocks = new ArrayList<>();
     }
 
     public int getUid() {
@@ -79,6 +86,14 @@ public class User {
 
     public void setMonthlysavings(double monthlysavings) {
         this.monthlysavings = monthlysavings;
+    }
+
+    public List<Stock> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(List<Stock> stocks) {
+        this.stocks = stocks;
     }
 
    

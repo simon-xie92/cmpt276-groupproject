@@ -19,7 +19,11 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cmpt276.groupproject.models.UserRepository;
+import com.cmpt276.groupproject.models.quote;
+import com.cmpt276.groupproject.service.FinnhubService;
 import com.cmpt276.groupproject.service.NewsService;
+import com.cmpt276.groupproject.service.StockService;
+import com.cmpt276.groupproject.service.UserService;
 import com.cmpt276.groupproject.models.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,7 +37,9 @@ import com.cmpt276.groupproject.models.ExpenseRepository;
 import com.cmpt276.groupproject.models.Goal;
 import com.cmpt276.groupproject.models.GoalRepository;
 import com.cmpt276.groupproject.models.NewsApiResponse;
+import com.cmpt276.groupproject.models.Stock;
 import com.cmpt276.groupproject.models.Transaction;
+import com.cmpt276.groupproject.models.StockRepository;
 
 
 
@@ -47,6 +53,15 @@ public class UsersController {
     private UserRepository userRepo;
 
     @Autowired
+    private StockRepository stockRepo;
+
+    @Autowired
+private UserService userService;
+
+@Autowired
+private StockService stockService;
+
+    @Autowired
     private TransactionRepository transactionRepo;
 
     @Autowired
@@ -57,6 +72,9 @@ public class UsersController {
 
     @Autowired
     private NewsService newsService;
+
+    @Autowired
+    private FinnhubService finnhubService;
 
     @GetMapping("/")
     public RedirectView process(){
@@ -97,7 +115,7 @@ public class UsersController {
         } else {
             //success
             User user = userlist.get(0);
-            request.getSession().setAttribute("session_user", user);
+            request.getSession(false).setAttribute("session_user", user);
             model.addAttribute("user", user);
             return home(model, request, session);
         }
@@ -294,7 +312,29 @@ public class UsersController {
 
     @GetMapping("/logout")
     public String destroySession(HttpServletRequest request){
-        request.getSession().invalidate();
+        request.getSession(false).invalidate();
         return "users/login";
     }
+
+    @PostMapping("/AddStock")
+    public String addStock(@RequestParam("symbol") String symbol, @RequestParam("quantity") int quantity, @RequestParam("purchasePrice") double purchasePrice, HttpSession session) {
+        stockService.addStock(session, symbol, quantity, purchasePrice);
+        return "redirect:/portfolio";
+    }
+
+
+
+    @GetMapping("/portfolio")
+public ModelAndView portfolio(HttpSession session) {
+    User user = userService.getCurrentUser(session);
+    List<Stock> stocks = stockService.getStocksForUser(user);
+    for (Stock stock : stocks) {
+        quote quote = finnhubService.getQuote(stock.getSymbol());
+        stock.setPurchasePrice(quote.getC());
+    }
+    ModelAndView modelAndView = new ModelAndView("portfolio");
+    modelAndView.addObject("stocks", stocks);
+    return modelAndView;
+}
+
 }
