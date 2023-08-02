@@ -32,11 +32,12 @@
 <body>
     <h1>Stocks</h1>
 
-    <form th:action="@{/stocks}" method="get">
-        <label for="symbol">Symbol</label>
-        <input type="text" id="symbol" name="symbol" placeholder="Enter symbol">
-        <button type="submit">Search</button>
-    </form>
+    <div class="Page">
+        <form th:action="@{/stocks}" method="get">
+            <label for="symbol">Symbol: </label>
+            <input type="text" id="symbol" name="symbol" placeholder="Enter symbol">
+            <button class="button" type="submit">Search</button>
+        </form>
 
     <h2>Quote</h2>
     <p><strong>Current price:</strong> <span th:text="${quote.c}"></span>
@@ -46,55 +47,6 @@
     <p><strong>Previous close price:</strong> <span th:text="${quote.pc}"></span>
     <strong>Percent change:</strong> <span th:text="${quote.dp}"></span>
     <strong>Change:</strong> <span th:text="${quote.d}"></span></p>
-
-    <button id="addStockBtn">Add Stock</button>
-
-    
-    <div id="addStockModal" class="modal">
-
-        
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form th:action="@{/AddStock}" method="POST">
-                <label for="symbol">Symbol:</label>
-    <input type="text" id="symbol" name="symbol" required>  
-                <label for="purchasePrice">Purchase Price:</label>
-                <input type="number" id="purchasePrice" name="purchasePrice" step="0.01" required>
-                <label for="quantity">Number of Shares:</label>
-                <input type="number" id="quantity" name="quantity" required>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-
-    </div>
-
-    <script>
-        
-        var modal = document.getElementById("addStockModal");
-
-        
-        var btn = document.getElementById("addStockBtn");
-
-        
-        var span = document.getElementsByClassName("close")[0];
-
-        
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 
     <h2>Recommendations (Number of Analysts recommending different strategies)</h2>
     <div th:each="recommendation, stat : ${recommendations}" th:if="${stat.count <= 2}">
