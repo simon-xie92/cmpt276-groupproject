@@ -32,24 +32,17 @@
 <body>
     <h1>Stocks</h1>
 
+
+
+
     <form th:action="@{/stocks}" method="get">
         <label for="symbol">Symbol</label>
         <input type="text" id="symbol" name="symbol" placeholder="Enter symbol">
         <button type="submit">Search</button>
     </form>
 
-    <h2>Quote</h2>
-    <p><strong>Current price:</strong> <span th:text="${quote.c}"></span>
-    <strong>High price of the day:</strong> <span th:text="${quote.h}"></span>
-    <strong>Low price of the day:</strong> <span th:text="${quote.l}"></span>
-    <strong>Open price of the day:</strong> <span th:text="${quote.o}"></span></p>
-    <p><strong>Previous close price:</strong> <span th:text="${quote.pc}"></span>
-    <strong>Percent change:</strong> <span th:text="${quote.dp}"></span>
-    <strong>Change:</strong> <span th:text="${quote.d}"></span></p>
 
-    <button id="addStockBtn">Add Stock</button>
-
-    
+    <button id="addStockBtn">Add to Portfolio</button>
     <div id="addStockModal" class="modal">
 
         
@@ -67,6 +60,20 @@
         </div>
 
     </div>
+
+    <h2>Quote</h2>
+    <p><strong>Current price:</strong> <span th:text="${quote.c}"></span>
+    <strong>High price of the day:</strong> <span th:text="${quote.h}"></span>
+    <strong>Low price of the day:</strong> <span th:text="${quote.l}"></span>
+    <strong>Open price of the day:</strong> <span th:text="${quote.o}"></span></p>
+    <p><strong>Previous close price:</strong> <span th:text="${quote.pc}"></span>
+    <strong>Percent change:</strong> <span th:text="${quote.dp}"></span>
+    <strong>Change:</strong> <span th:text="${quote.d}"></span></p>
+
+    
+
+    
+    
 
     <script>
         

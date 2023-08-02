@@ -1,5 +1,7 @@
 package com.cmpt276.groupproject.models;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -17,18 +19,28 @@ public class Stock {
     private int quantity;
     private double purchasePrice;
 
+    @Column(name = "entry_time")
+    private LocalDateTime entryTime;
+
 
     public Stock() {
     }
 
 
-    public Stock(int id, User user, String symbol, int quantity, double purchasePrice) {
+    
+
+
+    public Stock(int id, User user, String symbol, int quantity, double purchasePrice, LocalDateTime entryTime) {
         this.id = id;
         this.user = user;
         this.symbol = symbol;
         this.quantity = quantity;
         this.purchasePrice = purchasePrice;
+        this.entryTime = entryTime;
     }
+
+
+
 
 
     public int getId() {
@@ -78,6 +90,22 @@ public class Stock {
 
     public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
+    }
+
+
+
+
+
+    public LocalDateTime getEntryTime() {
+        return entryTime;
+    }
+
+
+
+
+
+    public void setEntryTime(LocalDateTime entryTime) {
+        this.entryTime = entryTime;
     }
 
 

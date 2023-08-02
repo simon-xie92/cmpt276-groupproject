@@ -2,14 +2,18 @@ package com.cmpt276.groupproject.controllers;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.dialect.function.LocatePositionEmulation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -36,7 +40,10 @@ import com.cmpt276.groupproject.models.Expense;
 import com.cmpt276.groupproject.models.ExpenseRepository;
 import com.cmpt276.groupproject.models.Goal;
 import com.cmpt276.groupproject.models.GoalRepository;
+import com.cmpt276.groupproject.models.News;
 import com.cmpt276.groupproject.models.NewsApiResponse;
+import com.cmpt276.groupproject.models.PortfolioItem;
+import com.cmpt276.groupproject.models.RecommendationTrend;
 import com.cmpt276.groupproject.models.Stock;
 import com.cmpt276.groupproject.models.Transaction;
 import com.cmpt276.groupproject.models.StockRepository;
@@ -147,11 +154,26 @@ private StockService stockService;
             List<Expense> expense = expenseRepo.findByUid(userId);
             List<Goal> goals = goalRepo.findByUid(userId);
             List<Article> headlines = newsService.getNews("Stocks").getArticles();
-            model.addAttribute("us", user);
+
+            
+    List<Stock> stocks = stockService.getStocksForUser(user);
+    List<PortfolioItem> portfolioItems = new ArrayList<>();
+    for (Stock stock : stocks) {
+        quote quote = finnhubService.getQuote(stock.getSymbol());
+        RecommendationTrend[] recommendations = finnhubService.getRecommendationTrends(stock.getSymbol());
+        News[] news = finnhubService.getNews(stock.getSymbol(), "2023-01-01", "2023-12-31");
+        PortfolioItem item = new PortfolioItem();
+        item.setStock(stock);
+        item.setQuote(quote);
+        item.setRecommendations(recommendations);
+        item.setNews(news);
+        portfolioItems.add(item);
+    }
             model.addAttribute("es", expense);
             model.addAttribute("ts", transaction);
             model.addAttribute("gs", goals);
             model.addAttribute("headlines", headlines);
+            model.addAttribute("portfolio", portfolioItems);
 
 
             return "users/homepage";
@@ -317,24 +339,45 @@ private StockService stockService;
     }
 
     @PostMapping("/AddStock")
-    public String addStock(@RequestParam("symbol") String symbol, @RequestParam("quantity") int quantity, @RequestParam("purchasePrice") double purchasePrice, HttpSession session) {
-        stockService.addStock(session, symbol, quantity, purchasePrice);
-        return "redirect:/portfolio";
+public String addStock(@RequestParam("symbol") String symbol, @RequestParam("quantity") int quantity, @RequestParam("purchasePrice") double purchasePrice, HttpSession session) {
+    User user = (User) session.getAttribute("session_user");
+    if (user == null) {
+        return "redirect:/login";
     }
+    LocalDateTime time = LocalDateTime.now();
+    stockService.addStock(user.getUid(), symbol, quantity, purchasePrice, time);
+    return "redirect:/portfolio";
+}
 
 
-
-    @GetMapping("/portfolio")
+@GetMapping("/portfolio")
 public ModelAndView portfolio(HttpSession session) {
     User user = userService.getCurrentUser(session);
     List<Stock> stocks = stockService.getStocksForUser(user);
+    List<PortfolioItem> portfolioItems = new ArrayList<>();
     for (Stock stock : stocks) {
         quote quote = finnhubService.getQuote(stock.getSymbol());
-        stock.setPurchasePrice(quote.getC());
+        RecommendationTrend[] recommendations = finnhubService.getRecommendationTrends(stock.getSymbol());
+        News[] news = finnhubService.getNews(stock.getSymbol(), "2023-01-01", "2023-12-31");
+        PortfolioItem item = new PortfolioItem();
+        item.setStock(stock);
+        item.setQuote(quote);
+        item.setRecommendations(recommendations);
+        item.setNews(news);
+        portfolioItems.add(item);
     }
     ModelAndView modelAndView = new ModelAndView("portfolio");
-    modelAndView.addObject("stocks", stocks);
+    modelAndView.addObject("portfolioItems", portfolioItems);
     return modelAndView;
 }
+
+
+@PostMapping("/{id}/{symbol}")
+public String deleteStock(@PathVariable Integer id, @PathVariable String symbol) {
+    stockService.removeStock(id, symbol);
+    return "redirect:/portfolio";
+}
+
+
 
 }

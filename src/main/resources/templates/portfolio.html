@@ -4,25 +4,47 @@
     <title>Portfolio</title>
 </head>
 <body>
+
     <h1>Portfolio</h1>
+
 
     <table>
         <thead>
             <tr>
-                <th>Symbol</th>
+                <th>Stock Symbol</th>
                 <th>Purchase Price</th>
                 <th>Current Price</th>
                 <th>Quantity</th>
                 <th>Profit/Loss</th>
+                <th>High Price</th>
+                <th>Low Price</th>
+                <th>Open Price</th>
+                <th>Previous Close Price</th>
+                <th>Day's Price Change</th>
+                <th>Headline News</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="stock : ${stocks}">
-                <td th:text="${stock.symbol}"></td>
-                <td th:text="${stock.purchasePrice}"></td>
-                <td th:text="${stock.currentPrice}"></td>
-                <td th:text="${stock.quantity}"></td>
-                <td th:text="${(stock.currentPrice - stock.purchasePrice) * stock.quantity}"></td>
+            <tr th:each="item : ${portfolioItems}">
+                <td th:text="${item.stock.symbol}"></td>
+                <td th:text="${item.stock.purchasePrice}"></td>
+                <td th:text="${item.quote.c}"></td>
+                <td th:text="${item.stock.quantity}"></td>
+                <td th:text="${(item.quote.c - item.stock.purchasePrice) * item.stock.quantity}"></td>
+                <td th:text="${item.quote.h}"></td>
+                <td th:text="${item.quote.l}"></td>
+                <td th:text="${item.quote.o}"></td>
+                <td th:text="${item.quote.pc}"></td>
+                <td th:text="${item.quote.dp}"></td>
+                <td th:text="${item.news[0].headline}"></td> <!-- Display the first news headline -->
+                <td>
+                    <form th:action="@{'/' + ${item.stock.id} + '/' + ${item.stock.symbol}}" method="POST">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit">Delete</button>
+                    </form>
+                    
+                </td>
             </tr>
         </tbody>
     </table>

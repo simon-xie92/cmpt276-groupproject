@@ -21,6 +21,7 @@
                 <li><a><button type = "button" onclick="location.href = '/interestCalc.html'"> Tools </button></a></li>
                 <li><a><button type = "button" onclick="location.href = '/news'"> News</button></a></li>
                 <li><a><button type = "button" onclick="location.href = '/stocks'"> Stocks</button></a></li>
+                <li><a><button type = "button" onclick="location.href = '/portfolio'"> Portfolio</button></a></li>
                 <li><a><button type = "button" onclick="location.href = '/logout'"> Log out</button></a></li>
                 
             </ul>
@@ -81,6 +82,28 @@
 
         <section class="Stock">
             <h3>Stocks</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stock Symbol</th>
+                        <th>Current Price</th>
+                        <th>Profit/Loss</th>
+                        <th>Open Price</th>
+                        <th>Previous Close Price</th>
+                        <th>Day's Price Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${portfolio}">
+                        <td th:text="${item.stock.symbol}"></td>
+                        <td th:text="${item.quote.c}"></td>
+                        <td th:text="${(item.quote.c - item.stock.purchasePrice) * item.stock.quantity}"></td>
+                        <td th:text="${item.quote.o}"></td>
+                        <td th:text="${item.quote.pc}"></td>
+                        <td th:text="${item.quote.dp}"></td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <section class="MonthlyBalance"  >

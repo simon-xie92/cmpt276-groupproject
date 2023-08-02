@@ -7,5 +7,6 @@ import com.cmpt276.groupproject.models.Stock;
 
 public interface StockRepository extends JpaRepository<Stock, Integer> {
     List<Stock> findByUser(User user);
+    void deleteByIdAndSymbol(Integer id, String symbol);
 
 }
