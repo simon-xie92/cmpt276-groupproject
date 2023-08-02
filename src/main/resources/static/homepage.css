@@ -221,6 +221,11 @@ p
     margin-top: 15px;
 }
 
+h2
+{
+    margin-left: 20px;
+}
+
 @media screen and (min-width: 1000px)
 {
     body 
@@ -236,7 +241,7 @@ p
 
     .Tabs nav ul
     {
-        text-align: right;
+        text-align: center;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
     }
@@ -290,3 +295,4 @@ p
         margin: 0;
     }
 }
+
