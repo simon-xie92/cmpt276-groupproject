@@ -7,35 +7,37 @@
 <body>
   
     <header>
-        <h1>Interest Calculator</h1>
+        <h1>Mortgage Calculator</h1>
       </header>
+    
+    <div class="mortgage">
+      <form class="form" action="#">
+        <div class="input-box">
+          <label for="principle">Principal Loan Amount</label>
+          <input id="principle" type="text" required />
+        </div>
 
-    <form class="form" action="#">
-      <div class="input-box">
-        <label for="principle">Principal Loan Amount</label>
-        <input id="principle" type="text" required />
-      </div>
+        <div class="input-box">
+          <label for="interest-rate">Interest Rate</label>
+          <input id="interest-rate" type="text" required /> <span>&percnt;</span>
+        </div>
 
-      <div class="input-box">
-        <label for="interest-rate">Interest Rate</label>
-        <input id="interest-rate" type="text" required /> <span>&percnt;</span>
-      </div>
+        <div class="input-box">
+          <label for="loan-term">Length of Loan</label>
+          <input id="loan-term" type="text" required />
+          <span>years</span>
+        </div>
 
-      <div class="input-box">
-        <label for="loan-term">Length of Loan</label>
-        <input id="loan-term" type="text" required />
-        <span>years</span>
-      </div>
+        <button type="submit" id="calculate-btn" class = "button">Calculate</button>
+        <p>
+          Your monthly mortgage payment will be
+          <span class="payment-amount"></span>
+        </p>
+      </form>
 
-      <button type="submit" id="calculate-btn" class = "button">Calculate</button>
-      <p>
-        Your monthly mortgage payment will be
-        <span class="payment-amount"></span>
-      </p>
-    </form>
-
-    <button class="returnButton" type="button" onclick="location.href = '/login'"> Stock Buddy</button>
-    <script src="mortgageCalc.js"></script>
+      <button class="returnButton" type="button" onclick="location.href = '/login'"> Stock Buddy</button>
+      <script src="mortgageCalc.js"></script>
+    </div>
 </body>
     
 </html>
