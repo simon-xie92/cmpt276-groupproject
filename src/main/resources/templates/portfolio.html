@@ -7,7 +7,7 @@
         body
         {
             margin: auto;
-            max-width: 900px;
+            max-width: 1000px;
         }
 
         h1
@@ -24,8 +24,40 @@
             text-align: center;
         }
 
-        
+        .returnButton
+        {
+            width: auto;
+            height: auto;
+            margin-left: 10px;
+            line-height: 1;
+            text-decoration: none;
+            color: rgba(17, 140, 79, .6);
+            font-size: 18px;
+            border-radius: 0px;
+            font-weight: bold;
+            border: 2px solid #333333;
+            transition: 0.3s;
+            box-shadow: 5px 5px 0px 0px  rgba(51, 51, 51, 1);
+            background-color: #ffffff;
+        }
 
+        .returnButton:hover 
+        {
+            box-shadow: 0 0 #333;
+            color: #fff;
+            background-color: rgba(17, 140, 79, .6);
+        }
+
+        table, th, td
+        {
+            border: black 2px solid;
+        }
+
+        table
+        {
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +105,9 @@
                 </tr>
             </tbody>
         </table>
+
+        <button class="returnButton" type="button" onclick="location.href = '/login'"> Stock Buddy</button>
+
     </div>
 </body>
 </html>
