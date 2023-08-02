@@ -6,23 +6,29 @@
 </head>
 <body>
   <h1>Stock Volume Calculator</h1>
-  <div class = container>
-    <div class="wrapper">
-        <label for="stockPrice">Stock Price:</label>
-        <input type="number" id="stockPrice" step="0.01">
-    </div><br>
-    <div class = "wrapper">
-        <label for="numShares">Number of Shares:</label>
-        <input type="number" id="numShares">
-    </div>
-    
-    <button type="submit" id="calculate-btn" class = "button">Calculate</button>
-    <div id="result"></div>
-</div>
-  <script src="stockVolumeCalc.js"></script>
+  <div class="volume">
+    <div class = container>
+      <div class="wrapper">
+          <label for="stockPrice">Stock Price:</label>
+          <input type="number" id="stockPrice" step="0.01">
+      </div><br>
+      <div class = "wrapper">
+          <label for="numShares">Number of Shares:</label>
+          <input type="number" id="numShares">
+      </div>
+      
+      <button type="submit" id="calculate-btn" class = "button">Calculate</button>
+      <div id="result"></div>
+  </div>
+    <script src="stockVolumeCalc.js"></script>
+
+    <button class="returnButton" type="button" onclick="location.href = '/login'"> Stock Buddy</button>
+  </div>
+
 </body>
     
 </html>
+
 
 
 
