@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Stocks</title>
+    <link rel="stylesheet" href="/stocks.css"/>
+    <title>Stocks page</title>
 </head>
 <body>
     <h1>Stocks</h1>
 
-    <form th:action="@{/stocks}" method="get">
-        <label for="symbol">Symbol</label>
-        <input type="text" id="symbol" name="symbol" placeholder="Enter symbol">
-        <button type="submit">Search</button>
-    </form>
+    <div class="Page">
+        <form th:action="@{/stocks}" method="get">
+            <label for="symbol">Symbol: </label>
+            <input type="text" id="symbol" name="symbol" placeholder="Enter symbol">
+            <button class="button" type="submit">Search</button>
+        </form>
 
-    <h2>Quote</h2>
-    <p><strong>Current price:</strong> <span th:text="${quote.c}"></span>
-    <strong>High price of the day:</strong> <span th:text="${quote.h}"></span>
-    <strong>Low price of the day:</strong> <span th:text="${quote.l}"></span>
-    <strong>Open price of the day:</strong> <span th:text="${quote.o}"></span></p>
-    <p><strong>Previous close price:</strong> <span th:text="${quote.pc}"></span>
-    <strong>Percent change:</strong> <span th:text="${quote.dp}"></span>
-    <strong>Change:</strong> <span th:text="${quote.d}"></span></p>
+        <div class="quote">
+            <h2>Quote</h2>
+            <p><strong>Current price:</strong> <span th:text="${quote.c}"></span>
+            <strong>High price of the day:</strong> <span th:text="${quote.h}"></span>
+            <strong>Low price of the day:</strong> <span th:text="${quote.l}"></span>
+            <strong>Open price of the day:</strong> <span th:text="${quote.o}"></span></p>
+            <p><strong>Previous close price:</strong> <span th:text="${quote.pc}"></span>
+            <strong>Percent change:</strong> <span th:text="${quote.dp}"></span>
+            <strong>Change:</strong> <span th:text="${quote.d}"></span></p>
+        </div>
+        
+        <div class="recommendations">
+            <h2>Recommendations (Number of Analysts recommending different strategies)</h2>
+            <div th:each="recommendation, stat : ${recommendations}" th:if="${stat.count <= 2}">
+                <p><strong>Period:</strong> <span th:text="${recommendation.period}"></span></p>
+                <p><strong>Buy:</strong> <span th:text="${recommendation.buy}"></span>
+                <strong>Hold:</strong> <span th:text="${recommendation.hold}"></span>
+                <strong>Sell:</strong> <span th:text="${recommendation.sell}"></span></p>
+                <p><strong>Strong Buy:</strong> <span th:text="${recommendation.strongBuy}"></span>
+                <strong>Strong Sell:</strong> <span th:text="${recommendation.strongSell}"></span>
+                <strong>Symbol:</strong> <span th:text="${recommendation.symbol}"></span></p>
+            </div>
+        </div>
+        
+        <div class="news">
+            <h2>News</h2>
+            <div id="NewsReport" th:each="newsItem, stat : ${news}" th:if="${stat.count <= 2}">
+                <p><h3><strong> <span th:text="${newsItem.headline}"></span></strong></h3></p>
+                <p><strong>Source:</strong> <span th:text="${newsItem.source}"></span></p>
+                <p><strong>Summary:</strong> <span th:text="${newsItem.summary}"></span></p>
+                <p><strong><a th:href="${newsItem.url}" th:text="link"></a></strong></p>
+            </div>
+        </div>
 
-    <h2>Recommendations (Number of Analysts recommending different strategies)</h2>
-    <div th:each="recommendation, stat : ${recommendations}" th:if="${stat.count <= 2}">
-        <p><strong>Period:</strong> <span th:text="${recommendation.period}"></span></p>
-        <p><strong>Buy:</strong> <span th:text="${recommendation.buy}"></span>
-        <strong>Hold:</strong> <span th:text="${recommendation.hold}"></span>
-        <strong>Sell:</strong> <span th:text="${recommendation.sell}"></span></p>
-        <p><strong>Strong Buy:</strong> <span th:text="${recommendation.strongBuy}"></span>
-        <strong>Strong Sell:</strong> <span th:text="${recommendation.strongSell}"></span>
-        <strong>Symbol:</strong> <span th:text="${recommendation.symbol}"></span></p>
-    </div>
+        <button class="returnButton" type="button" onclick="location.href = '/login'"> Stock Buddy</button>
 
-    <h2>News</h2>
-    <div th:each="newsItem, stat : ${news}" th:if="${stat.count <= 2}">
-        <p><h3><strong> <span th:text="${newsItem.headline}"></span></strong></h3></p>
-        <p><strong>Source:</strong> <span th:text="${newsItem.source}"></span></p>
-        <p><strong>Summary:</strong> <span th:text="${newsItem.summary}"></span></p>
-        <p><strong><a th:href="${newsItem.url}" th:text="${newsItem.url}"></a></strong></p>
     </div>
 </body>
 </html>
