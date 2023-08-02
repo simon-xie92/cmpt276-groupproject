@@ -236,7 +236,7 @@ p
 
     .Tabs nav ul
     {
-        text-align: right;
+        text-align: center;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
     }

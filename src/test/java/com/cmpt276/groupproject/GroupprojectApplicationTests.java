@@ -3,6 +3,8 @@ package com.cmpt276.groupproject;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.cmpt276.groupproject.models.Transaction;
 import com.cmpt276.groupproject.models.User;
 
 @SpringBootTest
