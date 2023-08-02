@@ -4,30 +4,113 @@
     <title>Stocks</title>
 
     <style>
-        
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        body
+        {
+            margin: auto;
+            max-width: 900px;
         }
 
-        
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
+        h1
+        {
+            color: gold;
+            font-size: 40px;
+            -webkit-text-stroke: 1px black;
         }
+
+        .stocks
+        {
+            border: 4mm ridge rgba(17, 140, 79, .6);
+            padding: 20px;
+        }
+
+        .quote
+        {
+            margin-bottom: 10px;
+        }
+
+        .recommendations
+        {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .news
+        {
+            margin-bottom: 50px;
+        }
+
+        input 
+        {
+            margin-bottom: 20px;
+            border: none;
+            font-size: 15px;
+            border-bottom: 2px solid black;
+            color: black;
+            padding: 2px 15px;
+        }
+
+        input:focus 
+        {
+            outline: none;
+            border-bottom: 2.4px solid gold;
+        }
+
+        .button
+        {
+            width: 100px;
+            height: 25px;
+            margin-left: 10px;
+            line-height: 1;
+            text-decoration: none;
+            color: rgba(17, 140, 79, .6);
+            font-size: 18px;
+            border-radius: 0px;
+            font-weight: bold;
+            border: 2px solid #333333;
+            transition: 0.3s;
+            box-shadow: 5px 5px 0px 0px  rgba(51, 51, 51, 1);
+            background-color: #ffffff;
+        }
+
+        .button:hover 
+        {
+            box-shadow: 0 0 #333;
+            color: #fff;
+            background-color: rgba(17, 140, 79, .6);
+        }
+
+        .returnButton
+        {
+            width: auto;
+            height: auto;
+            margin-left: 10px;
+            line-height: 1;
+            text-decoration: none;
+            color: rgba(17, 140, 79, .6);
+            font-size: 18px;
+            border-radius: 0px;
+            font-weight: bold;
+            border: 2px solid #333333;
+            transition: 0.3s;
+            box-shadow: 5px 5px 0px 0px  rgba(51, 51, 51, 1);
+            background-color: #ffffff;
+        }
+
+        .returnButton:hover 
+        {
+            box-shadow: 0 0 #333;
+            color: #fff;
+            background-color: rgba(17, 140, 79, .6);
+        }
+
+        .modal
+        {
+            border: 1px groove rgba(17, 140, 79, .6);
+            padding: 10px;
+        }
+
     </style>
+
 </head>
 <body>
     <h1>Stocks</h1>
@@ -35,91 +118,98 @@
 
 
 
-    <form th:action="@{/stocks}" method="get">
-        <label for="symbol">Symbol</label>
-        <input type="text" id="symbol" name="symbol" placeholder="Enter symbol">
-        <button type="submit">Search</button>
-    </form>
+    <div class="stocks">
+        <form th:action="@{/stocks}" method="get">
+            <label for="symbol">Symbol</label>
+            <input type="text" id="symbol" name="symbol" placeholder="Enter symbol">
+            <button class="button" type="submit">Search</button>
+        </form>
 
+        <div class="quote">
+            <h2>Quote</h2>
+            <p><strong>Current price:</strong> <span th:text="${quote.c}"></span>
+            <strong>High price of the day:</strong> <span th:text="${quote.h}"></span>
+            <strong>Low price of the day:</strong> <span th:text="${quote.l}"></span>
+            <strong>Open price of the day:</strong> <span th:text="${quote.o}"></span></p>
+            <p><strong>Previous close price:</strong> <span th:text="${quote.pc}"></span>
+            <strong>Percent change:</strong> <span th:text="${quote.dp}"></span>
+            <strong>Change:</strong> <span th:text="${quote.d}"></span></p>
 
-    <button id="addStockBtn">Add to Portfolio</button>
-    <div id="addStockModal" class="modal">
-
-        
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form th:action="@{/AddStock}" method="POST">
-                <label for="symbol">Symbol:</label>
-    <input type="text" id="symbol" name="symbol" required>  
-                <label for="purchasePrice">Purchase Price:</label>
-                <input type="number" id="purchasePrice" name="purchasePrice" step="0.01" required>
-                <label for="quantity">Number of Shares:</label>
-                <input type="number" id="quantity" name="quantity" required>
-                <button type="submit">Submit</button>
-            </form>
+            <button class="returnButton" id="addStockBtn">Add Stock</button>
         </div>
 
+        
+        <div id="addStockModal" class="modal">
+
+            
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form th:action="@{/AddStock}" method="POST">
+                    <label for="symbol">Symbol:</label>
+                    <input type="text" id="symbol" name="symbol" required>  
+                    <label for="purchasePrice">Purchase Price:</label>
+                    <input type="number" id="purchasePrice" name="purchasePrice" step="0.01" required>
+                    <label for="quantity">Number of Shares:</label>
+                    <input type="number" id="quantity" name="quantity" required>
+                    <button class="button" type="submit">Submit</button>
+                </form>
+            </div>
+
     </div>
 
-    <h2>Quote</h2>
-    <p><strong>Current price:</strong> <span th:text="${quote.c}"></span>
-    <strong>High price of the day:</strong> <span th:text="${quote.h}"></span>
-    <strong>Low price of the day:</strong> <span th:text="${quote.l}"></span>
-    <strong>Open price of the day:</strong> <span th:text="${quote.o}"></span></p>
-    <p><strong>Previous close price:</strong> <span th:text="${quote.pc}"></span>
-    <strong>Percent change:</strong> <span th:text="${quote.dp}"></span>
-    <strong>Change:</strong> <span th:text="${quote.d}"></span></p>
+        <script>
+            
+            var modal = document.getElementById("addStockModal");
 
-    
+            
+            var btn = document.getElementById("addStockBtn");
 
-    
-    
+            
+            var span = document.getElementsByClassName("close")[0];
 
-    <script>
-        
-        var modal = document.getElementById("addStockModal");
+            
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
 
-        
-        var btn = document.getElementById("addStockBtn");
-
-        
-        var span = document.getElementsByClassName("close")[0];
-
-        
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        
-        window.onclick = function(event) {
-            if (event.target == modal) {
+            
+            span.onclick = function() {
                 modal.style.display = "none";
             }
-        }
-    </script>
 
-    <h2>Recommendations (Number of Analysts recommending different strategies)</h2>
-    <div th:each="recommendation, stat : ${recommendations}" th:if="${stat.count <= 2}">
-        <p><strong>Period:</strong> <span th:text="${recommendation.period}"></span></p>
-        <p><strong>Buy:</strong> <span th:text="${recommendation.buy}"></span>
-        <strong>Hold:</strong> <span th:text="${recommendation.hold}"></span>
-        <strong>Sell:</strong> <span th:text="${recommendation.sell}"></span></p>
-        <p><strong>Strong Buy:</strong> <span th:text="${recommendation.strongBuy}"></span>
-        <strong>Strong Sell:</strong> <span th:text="${recommendation.strongSell}"></span>
-        <strong>Symbol:</strong> <span th:text="${recommendation.symbol}"></span></p>
-    </div>
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
 
-    <h2>News</h2>
-    <div th:each="newsItem, stat : ${news}" th:if="${stat.count <= 2}">
-        <p><h3><strong> <span th:text="${newsItem.headline}"></span></strong></h3></p>
-        <p><strong>Source:</strong> <span th:text="${newsItem.source}"></span></p>
-        <p><strong>Summary:</strong> <span th:text="${newsItem.summary}"></span></p>
-        <p><strong><a th:href="${newsItem.url}" th:text="${newsItem.url}"></a></strong></p>
+        <div class="recommendations">
+            <h2>Recommendations (Number of Analysts recommending different strategies)</h2>
+            <div th:each="recommendation, stat : ${recommendations}" th:if="${stat.count <= 2}">
+                <p><strong>Period:</strong> <span th:text="${recommendation.period}"></span></p>
+                <p><strong>Buy:</strong> <span th:text="${recommendation.buy}"></span>
+                <strong>Hold:</strong> <span th:text="${recommendation.hold}"></span>
+                <strong>Sell:</strong> <span th:text="${recommendation.sell}"></span></p>
+                <p><strong>Strong Buy:</strong> <span th:text="${recommendation.strongBuy}"></span>
+                <strong>Strong Sell:</strong> <span th:text="${recommendation.strongSell}"></span>
+                <strong>Symbol:</strong> <span th:text="${recommendation.symbol}"></span></p>
+            </div>
+        </div>
+
+        <div class="news">
+            <h2>News</h2>
+            <div th:each="newsItem, stat : ${news}" th:if="${stat.count <= 2}">
+                <p><h3><strong> <span th:text="${newsItem.headline}"></span></strong></h3></p>
+                <p><strong>Source:</strong> <span th:text="${newsItem.source}"></span></p>
+                <p><strong>Summary:</strong> <span th:text="${newsItem.summary}"></span></p>
+                <p><strong><a th:href="${newsItem.url}" th:text="link"></a></strong></p>
+            </div>
+        </div>
+
+        <button class="returnButton" type="button" onclick="location.href = '/login'"> Stock Buddy</button>
     </div>
 </body>
 </html>
+
